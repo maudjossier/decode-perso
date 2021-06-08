@@ -602,6 +602,7 @@ transform: scale(1.1)
 @media screen and (max-width: 500px) {
   .photo {
     width: 130px;
+    height:143px; 
     margin: 5px; 
     transition: transform .2s ;
     margin-bottom: 50px;
