@@ -1,0 +1,1374 @@
+@import url("https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+html {
+  scroll-behavior: smooth;
+  height: 100%;
+  background-color: #203126;
+}
+
+Link {
+  color: none;
+  text-decoration: none;
+}
+
+body {
+  height: 100%;
+  background-color: #fcfbf6;
+}
+
+#root {
+  height: 100%;
+  background-color: #203126;
+}
+
+.background {
+  background-color: #203126;
+  height: 100%;
+  width: 100%;
+}
+
+
+h1 {
+  font-family: "Abril Fatface", cursive;
+  font-weight: normal;
+}
+
+h2 {
+  font-family: "Abril Fatface", cursive;
+  font-weight: normal;
+}
+
+h3 {
+  font-family: "Montserrat";
+  font-weight: 600;
+  font-size: 35px;
+  margin-left: 10px;
+}
+
+h4 {
+  font-family: "Montserrat";
+  font-weight: 800;
+  font-size: 20px;
+}
+
+.textShoppingList {
+  font-family: "Montserrat";
+  font-size: 15px;
+  color: white; 
+  margin-bottom: 0px;
+}
+
+p {
+  font-family: "Montserrat";
+}
+
+/* NAVBAR */
+
+.navbarNormal {
+  width: 100%;
+  height: 120px;
+  background-color: #fcfbf6;
+  padding: 5px;
+  padding-left: 5px;
+  padding-top: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbarNormalFixe {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 110px;
+  background-color: #fcfbf6;
+  padding: 5px;
+  padding-left: 5px;
+  padding-top: 0;
+  display: flex;
+  justify-content: space-between;
+  z-index: 100;
+}
+
+.icon {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-right: 20px;
+}
+
+.h2Navbar {
+  margin : 0px 0px 0px 20px;
+  color: #203126;
+  font-size: 3rem;
+  margin-top: 0px; 
+  margin-left: 20px;
+  font-family: "Abril Fatface", cursive;
+  font-weight: normal;
+  margin-bottom: 5px;
+}
+
+
+.TitleNavBox {
+  display: flex;
+  align-items: center;
+  margin-left: 20px;
+}
+
+
+
+@media screen and (max-width: 500px) {
+  .navbarNormal {
+    width: 100%;
+    height: 10%;
+    background-color: #fcfbf6;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .h2Navbar {
+    margin : 0px 0px 0px 20px;
+    color: #203126;
+    font-size: 50px;
+  }
+}
+@media screen and (max-width: 500px) {
+  .navbarNormalFixe {
+    position:fixed;
+    width: 100%;
+    height: 10%;
+    background-color: #fcfbf6;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .h2Navbar {
+    font-size:2rem;
+    margin-top: 0px; 
+    margin-left: 5px;
+    font-family: "Abril Fatface", cursive;
+    font-weight: normal;
+    margin-bottom: 5px;
+  }
+}
+
+/* PAGE HOME */
+
+.mycontainer {
+  height: 100vh;
+  max-width: 100vw;
+  padding: 0px;
+  margin:0px;
+  scroll-behavior: smooth;
+}
+
+.container {
+  width:100%
+}
+
+.navbarHome {
+  width: 100vw;
+  height: 20%;
+  position: fixed;
+  background-color: #fcfbf6;
+  margin:0px;
+  padding: 5px;
+  padding-left: 5px;
+  padding-top: 0;
+  color: #203126;
+  display: flex;
+  justify-content: space-between;
+  z-index: 100;
+}
+
+.NavBarIcon {
+  width:30px;
+  margin:15px;
+}
+
+.pictoWishlist {
+  width:30px;
+}
+
+.imageBackground {
+  background-image: url(background.png);
+  height: 100vh;
+  width: 100vw;
+  background-size: 100%;
+  background-repeat: no-repeat;
+  display:flex; 
+  margin:0px;
+  padding:0px;
+  justify-content:flex-end;
+
+}
+
+.TitleHomeBox {
+  display: flex;
+  align-items: flex-end ;
+}
+
+.HomeDecode {
+  font-size: 70px;
+  font-family: "Abril Fatface", cursive;
+  font-weight: normal;
+  margin: 0px 0px 0px 20px;
+  color:#203126
+}
+
+.ContainerFluidHome{
+  display: flex;
+  margin-top: 50px;
+}
+.ContainerFluidHome2{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  height: 100vh;
+}
+.containerText1Home {
+display:flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+padding:100px;
+margin-left: 100px;
+}
+
+#pHome { 
+  color:#203126;
+  font-family: "Montserrat";
+  font-weight:800;
+  font-size: 2.8rem !important;
+  text-align: center;
+  animation: fadeInDown 1s; 
+  /* filter: drop-shadow(0 0 0.2rem #fbfcf6); */
+ 
+}
+
+
+@keyframes fadeInDown {
+  0% 
+    {opacity: 0.5;
+    transform: translateY(-25vh);}
+  100% 
+    {opacity: 1;
+    transform: translateY(0);}
+} 
+
+
+.pHome1 {
+  font-family: "Montserrat";
+  width: 70vw;
+  font-size: 25px;
+  margin-left: 10px;
+  color: white;
+}
+
+.chevronBlanc {
+  transition: transform .2s;
+  width: 60px;
+  
+}
+.chevronBlanc:hover {
+  transform: scale(1.1);
+}
+
+.chevronBlanc2 {
+  transform: rotate(180deg);
+  margin-top: 20vh;
+  transition: transform .2s;
+  width: 60px;
+}
+
+.chevronBlanc2:hover {
+  transform: scale(1.1) rotate(180deg);
+}
+.HomePalette {
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+}
+
+.paletteNoire {
+  width: 60px;
+  height: 60px;
+  background: #2f2f31;
+  border-radius: 20px;
+  margin: 20px;
+}
+
+.paletteBrune {
+  width: 60px;
+  height: 60px;
+  background: #9d7d61;
+  border-radius: 20px;
+  margin: 20px;
+
+}
+.paletteBleue {
+  width: 60px;
+  height: 60px;
+  background: #2c324b;
+  border-radius: 20px;
+  margin: 20px;
+}
+.paletteOr {
+  width: 60px;
+  height: 60px;
+  background: #bb9a4d;
+  border-radius: 20px;
+  margin: 20px;
+}
+.paletteBlanc {
+  width: 60px;
+  height: 60px;
+  z-index: 25;
+  background: #e6e7eb;
+  border-radius: 20px;
+  margin: 20px;
+}
+
+
+
+.titreHomeSection2 {
+  font-family: "Montserrat";
+  font-style: normal;
+  font-size: 25px;
+  color: #fdfcf6;
+}
+
+.ButtonHome1 {
+  border-radius: 50px;
+  opacity: 0.9;
+  border: 1px solid #3e5f49;
+  margin-top: 10%;
+  height: 6vh;
+  width: 20vw;
+  font-size: 1.2rem;
+  color: white;
+  background-color: #203126;
+  cursor: pointer;
+  transition: transform .2s 
+}
+.ButtonHome1:hover{
+transform: scale(1.1)
+}
+
+.ButtonHome2 {
+  border-radius: 50px;
+  border: 0px solid #203126;
+  height: 6vh;
+  width: 20vw;
+  font-size: 1rem;
+  color: #203126;
+  background-color: #fdfcf6;
+  cursor: pointer;
+  transition: transform .2s 
+}
+
+.ButtonHome2:hover {
+  transform: scale(1.1)
+}
+
+@media screen and (max-width: 500px) {
+  .imageBackground {
+    background-image: url(1b6be39272af342e96dfd83697910242.jpeg);
+    padding-top: 100px;
+    display:flex; 
+    align-items: center;
+    justify-content: center;
+    color: #203126;
+   
+  }
+  .TitleHomeBox {
+    display: flex;
+    align-items: center;
+  }
+  .HomeDecode {
+    font-size:2rem;
+    margin-top: 0px; 
+    margin-left: 5px;
+    font-family: "Abril Fatface", cursive;
+    font-weight: normal;
+    margin-bottom: 5px;
+  }
+  #pHome {
+    font-size: 35px !important;
+    font-family: "Montserrat";
+    font-weight: 600;
+    text-align: center;
+    animation: fadeInDown 1s;
+    color: #fcfbf6; 
+    filter: drop-shadow(0 0 0.75rem #203126);
+  }
+  .ContainerFluidHome{
+    display: flex;
+  }
+  .navbarHome {
+    position: fixed;
+    background-color: #fcfbf6;
+    margin:0px;
+    padding: 5px;
+    padding-left: 5px;
+    padding-top: 0;
+    height: 10%;
+    color: #203126;
+    display: flex;
+    justify-content: space-between;
+    z-index: 100;
+  }
+  .icon {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin:0px
+  }
+  .NavBarIcon {
+    width: 1.5rem
+  }
+  .pictoWishlist {
+    width: 1.5rem
+  }
+  
+
+  .containerText1Home {
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding:0px;
+    margin-left: 0px;
+    }
+
+  .HomePalette {
+    display: none
+    }
+
+  .chevronBlanc {
+    transition: transform .2s;
+    width: 3rem;
+    margin-top: 20px;
+  }
+  .chevronBlanc2 {
+    transition: transform .2s;
+    width: 3rem;
+    margin-top: 7vh;
+  }
+  .ButtonHome1 {
+    border-radius: 50px;
+    opacity: 0.9;
+    border: 1px solid #203126;
+    margin-top: 10%;
+    height: 45px;
+    width: 250px;
+    font-size: 15px;
+    color: #203126;
+    background-color: #fcfbf6;
+    cursor: pointer;
+    transition: transform .2s 
+  }
+  .ButtonHome2 {
+    border-radius: 50px;
+    border: 0px solid #203126;
+    height: 45px;
+    width: 250px;
+    font-size: 15px;
+    color: #203126;
+    background-color: #fdfcf6;
+    cursor: pointer;
+    transition: transform .2s 
+  }
+  
+    .pHome1 {
+      font-family: "Montserrat";
+      width: 70vw;
+      font-size: 20px;
+      margin-left: 10px;
+      color: white;
+    }
+    
+}
+
+
+
+/* PAGE QUIZ */
+.ScreenQuestion {
+  display: flex;
+  flex-direction: column
+}
+
+.questions {
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: normal;
+  font-size: 25px;
+  line-height: 50px;
+  /* or 139% */
+  letter-spacing: 0.15px;
+  color: #fcfbf6;
+  padding-top: 20px ;
+  padding-left: 20px
+}
+
+.questionsPhoto {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.ProgressBar {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.inputValider {
+  border-radius: 50px;
+  opacity: 0.8;
+  border: 1px solid #203126;
+  margin-top: 2vh;
+  margin-left: 11.5vw;
+  height: 5vh;
+  width: 6.5vw;
+  font-size: 13px;
+  color: white;
+  background-color: #203126;
+}
+
+.quizzButton {
+  display: flex;
+  justify-content: center;
+  padding-bottom: 50px;
+}
+
+.ButtonQuestionnaire {
+  border-radius: 50px;
+  border: 0px solid #203126;
+  height: 6vh;
+  width: 15vw;
+  padding:3%;
+  font-size: 1rem;
+  color: #203126;
+  background-color: #fdfcf6;
+  cursor: pointer;
+  margin-top: 10px;
+ transition: transform .2s 
+}
+.ButtonQuestionnaire:hover{
+transform: scale(1.1)
+}
+
+.photoBox {
+  display: flex;
+  justify-content: center;
+  padding: 20px;  
+  transition: transform .2s ;
+}
+.photoBox:hover {
+cursor: pointer; 
+transform: scale(1.1)
+}
+
+.arrow-button {
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  margin: 10px 15px 0px 15px;
+  transition: transform .2s 
+}
+
+.arrow-button:hover {
+  transform: scale(1.2);
+  cursor: pointer;
+} 
+
+.ErrorQuiz {
+  font-family: "Montserrat";
+  font-size: 15px;
+  color: #fcfbf6;
+  text-align: center;
+  margin-top: 5px;
+}
+
+@media screen and (max-width: 500px) {
+  .photo {
+    width: 130px;
+    margin: 5px; 
+    transition: transform .2s ;
+    margin-bottom: 50px;
+  }
+  .photoBox:hover {
+    cursor: pointer; 
+    transform: scale(1.1)
+    }
+
+  .photoBox {
+    display: flex;
+    justify-content: center;
+    padding: 0px;  
+    transition: transform .2s ;
+  }
+  .questions {
+    font-family: "Montserrat";
+    font-style: normal;
+    font-weight: normal;
+    font-size: 15px;
+    line-height: 20px;
+    color: #fcfbf6;
+    padding-top: 20px ;
+    padding-left: 20px;
+    padding-bottom: 20px;
+  }
+  .ButtonQuestionnaire {
+    border-radius: 50px;
+    border: 0px solid #203126;
+    height: 6vh;
+    width: 100px ;
+    font-size: 1rem;
+    color: #203126;
+    background-color: #fdfcf6;
+    cursor: pointer;
+    transition: transform .2s ;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+
+  }
+}
+
+/* PAGE MYPALETTE */
+
+.containerMypalette{
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.MypaletteBox {
+  width: 70vw;
+  background-color: #fcfbf6;
+  border-radius: 10px;
+  margin-top: 10vh;
+}
+
+.h3Mypalette {
+  font-family: "Montserrat";
+  font-weight: 700;
+  color: #203126;
+  letter-spacing: -1.5px;
+  padding-top: 1vh;
+  margin: 0 0 0 1vw;
+  font-size: 30px;
+}
+
+.traitMypalette {
+  width: 100%;
+  height: 3px;
+  background-color: #203126;
+}
+
+.RowPalette{
+  display:flex !important;  
+  align-items: center !important;
+  justify-content: center !important;
+  margin:0px !important; 
+ }
+
+.descriptionMypalette {
+  font-family: "Montserrat";
+  font-style: normal;
+  font-size: 20px;
+  margin-top: 5vh;
+  color: #fdfcf7;
+  width: 70vw;
+  text-align: justify;
+}
+
+.textColorPalette {
+  font-family: "Montserrat";
+  margin-left: 5px;
+  transform: scale(1, -1);
+  -moz-transform: scale(1, -1);
+  -webkit-transform: scale(1, -1);
+  -o-transform: scale(1, -1);
+  -ms-transform: scale(1, -1);
+  transform: scale(1, -1);
+}
+
+.row { 
+  margin:0px !important;
+  padding: 0px !important;
+}
+
+.palette {
+  width: 8rem;
+  height: 8rem;
+  margin:10px !important; 
+  transform: matrix(0, -1, -1, 0, 0, 0);
+}
+
+
+.inputMypalette {
+  border-radius: 50px;
+  border: 0px solid #203126;
+  height: 45px;
+  width: 250px;
+  font-size: 15px;
+  color: #203126;
+  background-color: #fdfcf7;
+  cursor: pointer;
+  transition: transform .2s 
+}
+.inputMypalette:hover{
+  transform: scale(1.05)
+}
+
+
+.notifcopy {
+  background-color: #fcfbf6 !important;
+  font-family: "Montserrat";
+  font-weight: bold !important;
+  color: red !important;
+  border-radius: 15px !important;
+  padding-bottom: 0px !important;
+}
+
+.col-2 {
+  flex: 0 0 16.666667%;
+  max-width: 30% !important;
+  padding-right: 0px !important;
+  padding-left: 0px !important    
+}
+
+@media (min-width: 992px) { 
+.col-lg-2 {
+    flex: 0 0 16.666667%;
+    max-width: 20% !important;  
+}
+}
+
+@media screen and (max-width: 500px){
+  .MypaletteBox {
+    width: 70vw;
+    background-color: #fcfbf6;
+    border-radius: 10px;
+    margin-top: 8%;
+  }
+  .palette {
+    width: 60px;
+    height: 60px;
+  /*   margin-left: 0px !important; */
+    margin-top: 10px !important; 
+  }
+  .textColorPalette {
+    font-family: "Montserrat";
+    margin-left: 5px;
+    font-size: 8px;
+    transform: scale(1, -1);
+    -moz-transform: scale(1, -1);
+    -webkit-transform: scale(1, -1);
+    -o-transform: scale(1, -1);
+    -ms-transform: scale(1, -1);
+    transform: scale(1, -1);
+  }
+
+  .container {
+    margin: 0px !important;
+    padding: 0px !important
+  }
+
+  .descriptionMypalette {
+    font-family: "Montserrat";
+    font-style: normal;
+    font-size: 18px;
+    margin-top: 5vh;
+    color: #fdfcf7;
+    width: 70vw;
+    text-align: justify;
+  }
+  .h3Mypalette {
+    font-family: "Montserrat";
+    font-weight: 700;
+    color: #203126;
+    letter-spacing: -1.5px;
+    padding-top: 1vh;
+    margin: 0 0 0 1vw;
+    font-size: 22px;
+  }
+}
+/* PAGE SHOPPING LIST */
+
+.PaletteColors {
+  display:flex;
+  justify-content: space-around;
+}
+
+.greenBar {
+  height: 16vh; 
+  background-color: #203126
+}
+
+.ArticleShoppingList {  
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1%;
+}
+
+.TitleShoppingListContainer{
+font-weight: bold;
+width:80%;
+border-bottom: 3px solid #203126;
+color:#203126;
+margin-bottom: 10px;
+}
+
+.FilterContainer {
+  display: flex;
+  width:80%;
+  justify-content: left;
+}
+
+#Popover1 {
+background-color: #fcfbf6;
+border: 1px solid #203126;
+color:#203126;
+border-radius: 15px;
+margin-bottom:15px;
+}
+
+.h6filter {
+  background-color: #fcfbf6;
+  color: #203126;
+  border-bottom: 1px solid #203126;
+  font-weight: 700;
+  font-family: "Montserrat";
+
+}
+
+.ant-popover-inner-content {
+  background-color: #fcfbf6;
+}
+
+.ant-checkbox-checked .ant-checkbox-inner {
+  background-color: #203126 !important;
+  border-color: #203126 !important;
+}
+
+.articleCardTitle {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  color: #203126;
+}
+
+.articleCardBrand {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 400;
+  font-size: 12px;
+  color: #203126;
+  opacity: 0.54;
+}
+
+.scrollerShoppingList {
+  display:flex;
+  justify-content: center;
+  width: 100%;
+  height: 53vh;
+  overflow-y: scroll;
+  scrollbar-color: rebeccapurple green;
+  scrollbar-width: thin;
+}
+
+.containerArticles {
+  display:flex;
+  justify-content: center;
+  margin-bottom: 3px;
+}
+
+.rowArticles {
+  display: flex;
+  justify-content: center;
+}
+
+.scrollShoppingList {
+background-color: #203126;
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+padding: 6px 6px 15px 6px;
+}
+
+.articleCard{
+  background-color: white;
+  margin:10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.productImage{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 35vh;
+}
+
+.productInfo {
+  display: flex;
+  justify-content: space-between;
+}
+
+.cardPartLeft {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  margin-right: 5px;
+}
+.cardPartRight{
+  display: flex;
+  flex-direction: column;
+  margin:0px;
+  align-items: flex-end;
+  justify-content: flex-end;
+}
+.arrowShoppingList {
+height: 30px;
+margin-top:6px ;
+transition: transform .2s
+}
+
+.arrowShoppingList:hover {
+  transform: scale(1.1);
+}
+
+.ContainerInspi {
+  background-color: #fcfbf6;
+}
+
+.Inpiration-Text {
+margin-left: 10%;
+margin-right: 10%;
+}
+
+.Inspirations-DisplayPhoto {
+background-color: #fcfbf6;
+height: 100%;
+display: flex;
+width: 100%;
+}
+
+.containerPhotoInspi{
+display:flex;
+justify-content: center;
+margin-bottom: 30px;
+}
+
+.rowPhotoInspi {
+  display: flex;
+  justify-content: center;
+}
+
+.color1{
+  height: 50px;
+  width:50px;
+}
+
+.inputShoppingList {
+  border-radius: 50px;
+  border: 0px solid #203126;
+  width: 15vw;
+  min-height: 4vh;
+  min-width: 18vw;
+  font-size: 1rem;
+  color: #fdfcf7;
+  background-color: #203126;
+  cursor: pointer;
+  transition: transform .2s
+}
+
+.inputShoppingList:hover {
+  transform: scale(1.1)
+}
+
+@media screen and (max-width: 500px) {
+  .inputShoppingList {
+    border-radius: 50px;
+    border: 0px solid #203126;
+    width: 15vw;
+    min-height: 5vh;
+    min-width: 40vw;
+    font-size: 0.8rem;
+    color: #fdfcf7;
+    background-color: #203126;
+    cursor: pointer;
+    transition: transform .2s
+  }
+  .color1{
+    height: 35px;
+    width:35px;
+  }
+  .TitleShoppingListContainer{
+    font-weight: bold;
+    width: 90%;
+    border-bottom: 3px solid #203126;
+    color:#203126;
+    margin-bottom: 10px;
+    margin-left: 10px;
+    margin-top: 15px;
+    font-size: 22px  !important;
+    }
+  #Popover1 {
+    background-color: #fcfbf6;
+    border: 1px solid #203126;
+    color:#203126;
+    border-radius: 15px;
+    margin-left: 10px;
+    margin-bottom:15px;
+  }
+  .greenBar {
+    height: 12vh; 
+    background-color: '#203126'
+  }
+}
+
+/* PAGE LOGIN */
+
+.formLogin {
+  display:flex;
+  flex-direction: column;
+  justify-content: center; 
+  border-radius: 30px;
+  z-index: 50; 
+}
+
+.input_login {
+  border-radius: 50px !important;
+  border: 1px solid #203126 !important;
+  opacity: 0.8 !important;
+  margin-top: 2vh !important;
+/*   height: 5.5vh !important; */
+  font-size: 15px !important;
+  padding-left: 0.5vw!important;
+ /*  width: 18vw !important; */
+}
+.containerLogin {
+  display:flex;
+  justify-content: center;
+}
+.boxLogin {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: space-evenly;
+  background-color: #fcfbf6;
+  border-radius: 10px;
+  z-index:20;
+  width: 60%;
+}
+
+.login {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  margin:60px
+}
+
+.connexion {
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  font-family: "Montserrat";
+  font-size: 18px;
+  font-weight: normal;
+  color: #203126;
+  margin:20px
+  
+}
+
+.inscription {
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+  font-family: "Montserrat";
+  font-size: 18px;
+  font-weight: normal;
+  color: #203126;
+  margin:20px
+}
+
+.h3title {
+  font-family: "Montserrat";
+  text-align: left;
+  padding-top: 15px;
+  margin-bottom: 10px;
+  color: #203126;
+  letter-spacing: -1.5px;
+}
+
+.titleLogin{
+  display: flex;
+  justify-content: left;
+  width: 100%;
+}
+.boxButton {
+  display: flex;
+  width: 100%;
+}
+
+.inputValiderLogin {
+  border-radius: 50px;
+  opacity: 0.8;
+  border: 1px solid #203126;
+  margin-top: 2vh;
+  height: 1.8rem;
+  font-size: 13px;
+  color: white;
+  background-color: #203126;
+}
+
+.trait {
+ margin: 40px;
+} 
+
+.trait2 {
+  width: 100%;
+  height: 3px;
+  background-color: #203126;
+}
+
+@media screen and (max-width: 500px) {
+  .boxButton {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+  .trait {
+    margin: 40px;
+    display:none;
+   }
+  .h3title {
+    font-family: "Montserrat";
+    text-align: left;
+    font-size: 22px;
+    padding-top: 15px;
+    margin-bottom: 10px;
+    color: #203126;
+    letter-spacing: -1.5px;
+  }
+}
+
+/* PAGE WISHLIST */
+
+
+.backgroundWishlist {
+  background-color: #fcfbf6;
+  width: 100%;
+  padding-bottom: 19vh;
+}
+
+.inputWishlistNonConnecte {
+  border-radius: 50px;
+  border: 0px solid #203126;
+  height: 45px;
+  
+  font-size: 15px;
+  color: #fdfcf7;
+  background-color: #203126;
+  cursor: pointer;
+  transition: transform .2s
+}
+
+.messageWishlist {
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+.inputWishlistNonConnecte:hover {
+  transform: scale(1.1)
+}
+
+ .wishlist-text {
+  padding:10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  width:100%
+} 
+
+.wishlist-title{
+  font-weight: bold;
+  width: 100%;
+  border-bottom: 3px solid #203126;
+  color:#203126;
+  margin-bottom: 10px;
+}
+
+
+.traitWishlist {
+  width: 150%;
+  height: 5px;
+  background-color: #203126;
+}
+
+.inputWishlist {
+  border-radius: 50px;
+  border: 0px solid #203126;
+  height: 45px;
+  width: 200px;
+  font-size: 15px;
+  color:#fdfcf7;
+  background-color: #203126;
+  cursor: pointer;
+  transition: transform .2s
+}
+
+.inputWishlist:hover {
+  transform: scale(1.1)
+}
+
+.containerWishlistCard{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1%;
+}
+.articleWishList {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 600;
+  font-size: 13px;
+  color:  #203126;
+}
+
+.cardWishlist {
+ background-color:white;
+ margin: 10px;
+ min-width: 210px;
+ display: flex;
+ flex-direction: column;
+ justify-content: space-between;
+}
+
+.imageWishlist {
+display:flex;
+justify-content: center;
+align-items: center;
+width: 100%;
+height: 35vh;
+}
+
+.infoWishlist {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  margin-right: 5px;
+}
+
+.priceWishlist {
+display: flex;
+flex-direction: column;
+align-items: flex-end;
+justify-content: flex-end;
+}
+
+@media screen and (max-width: 500px) {
+  .inputWishlist {
+    border-radius: 50px;
+    border: 0px solid #203126;
+    height: 45px;
+    width: 150px;
+    font-size: 12px;
+    color:#fdfcf7;
+    background-color: #203126;
+    cursor: pointer;
+    transition: transform .2s
+  }
+}
+
+/* PAGE ALLPALETTES */
+
+.containerAllPalettes {
+  height: 20vh;
+  width: 35vw;
+  background-color: #fcfbf6;
+  border-radius: 10px;
+  margin-left: 12vw;
+  margin-top: 3vh;
+}
+
+.h3AllPalettes {
+  font-family: "Montserrat";
+  font-weight: 700;
+  color: #fcfbf6;
+  letter-spacing: -1.5px;
+  padding-top: 1vh;
+  margin: 0 0 0 10vw;
+  font-size: 25px;
+  margin-top: 3vh;
+}
+
+.traitAllPalettes {
+  width: 80%;
+  height: 3px;
+  display: flex;
+  justify-content: center;
+  background-color: #fcfbf6;
+  margin-left: 10vw;
+  margin-top: 1vh;
+}
+
+.traitContainerAllPalettes {
+  width: 35vw;
+  height: 3px;
+  display: flex;
+  justify-content: center;
+  background-color: #203126;
+}
+
+.h3Container {
+  font-family: "Montserrat";
+  font-weight: 700;
+  color: #203126;
+  letter-spacing: -1.5px;
+  padding-top: 1vh;
+  margin: 0 0 0 2vw;
+  font-size: 25px;
+  margin-top: 1vh;
+}
+
+.paletteAllPalettes {
+  width: 70px;
+  height: 70px;
+  transform: matrix(0, -1, -1, 0, 0, 0);
+}
+
+.paletteContainer {
+  display: flex;
+  width: 30vw;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 3vh;
+}
+
+.carouselAllPalettes {
+background-color: #203126;
+max-width: 80%;
+margin-left: 10%;
+padding-left: 10%;
+}
+
