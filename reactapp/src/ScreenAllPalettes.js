@@ -44,6 +44,7 @@ console.log('hello', allPalettes);
   return (
     <div className="background">
       <NavBar />
+      <div className="AllPaletteContainer"> </div>
       <h3 className="h3AllPalettes">TOUTES LES PALETTES</h3>
       <div className="traitAllPalettes"></div>
      {TabAllPalettes}

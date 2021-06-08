@@ -89,7 +89,7 @@ if (wishlist.length !== 0){
       <Container className="containerWishlistCard" > 
       <div className="wishlist-text" > 
         <div className="wishlist-title">
-        <h4>
+        <h4 className="h4style">
             VOTRE WISHLIST
         </h4>
         </div>

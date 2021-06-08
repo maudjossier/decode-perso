@@ -255,7 +255,7 @@ var content = (
         <div className='ArticleShoppingList'> 
           <div className="TitleShoppingListContainer"> 
             
-            <h4> VOTRE SHOPPING LIST {paletteName}</h4>
+            <h4 className="h4style"> VOTRE SHOPPING LIST {paletteName}</h4>
             </div>
             {/* FILTRER  */}
             <div className='FilterContainer'> 

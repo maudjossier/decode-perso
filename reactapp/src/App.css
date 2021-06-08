@@ -549,11 +549,13 @@ transform: scale(1.1)
 }
 
 .ButtonQuestionnaire {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   border-radius: 50px;
   border: 0px solid #203126;
   height: 6vh;
   width: 15vw;
-  padding:3%;
   font-size: 1rem;
   color: #203126;
   background-color: #fdfcf6;
@@ -812,8 +814,14 @@ transform: scale(1.1)
 }
 
 .greenBar {
-  height: 16vh; 
+  height: 15vh; 
   background-color: #203126
+}
+
+.h4style {
+font-weight: bold;
+color:#203126;
+margin-bottom: 10px;
 }
 
 .ArticleShoppingList {  
@@ -1029,6 +1037,17 @@ margin-bottom: 30px;
     margin-top: 15px;
     font-size: 22px  !important;
     }
+
+
+.h4style {
+  font-weight: bold;
+  color:#203126;
+  margin-bottom: 10px;
+  margin-left: 10px;
+  margin-top: 15px;
+  font-size: 22px  !important;
+  }
+
   #Popover1 {
     background-color: #fcfbf6;
     border: 1px solid #203126;
@@ -1302,13 +1321,28 @@ justify-content: flex-end;
 
 /* PAGE ALLPALETTES */
 
-.containerAllPalettes {
-  height: 20vh;
-  width: 35vw;
+.AllPaletteContainer {
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+}
+
+.boxAllPalettes {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  width: 40%;
   background-color: #fcfbf6;
   border-radius: 10px;
-  margin-left: 12vw;
   margin-top: 3vh;
+  margin-left: 10%;
+}
+
+.containerTitleAllPalette { 
+  display: flex;
+  flex-direction: column;
 }
 
 .h3AllPalettes {
@@ -1317,9 +1351,9 @@ justify-content: flex-end;
   color: #fcfbf6;
   letter-spacing: -1.5px;
   padding-top: 1vh;
-  margin: 0 0 0 10vw;
   font-size: 25px;
   margin-top: 3vh;
+  margin-left: 10%;
 }
 
 .traitAllPalettes {
@@ -1333,11 +1367,15 @@ justify-content: flex-end;
 }
 
 .traitContainerAllPalettes {
-  width: 35vw;
   height: 3px;
   display: flex;
   justify-content: center;
   background-color: #203126;
+}
+
+.TitlePaletteBox {
+  display: flex;
+  justify-content: flex-start;
 }
 
 .h3Container {
@@ -1352,23 +1390,64 @@ justify-content: flex-end;
 }
 
 .paletteAllPalettes {
-  width: 70px;
-  height: 70px;
+  width: 5rem;
+  height: 5rem;
   transform: matrix(0, -1, -1, 0, 0, 0);
 }
 
 .paletteContainer {
   display: flex;
-  width: 30vw;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: space-evenly;
   margin-top: 3vh;
+  margin-bottom: 3vh;
 }
 
 .carouselAllPalettes {
 background-color: #203126;
-max-width: 80%;
-margin-left: 10%;
-padding-left: 10%;
+width: 80%;
+height: fit-content;
 }
 
+.PhotoInspoAllPalette {
+  /* marginRight: '20px', height:'100%', maxWidth: '500px',maxHeight:'4000',borderRadius:"10px" */
+margin-right: 20px;
+height: 100%;
+max-width: 500px;
+border-radius: 10px;
+}
+
+.containerCarousel{
+  margin-bottom:50px;
+  margin-top: 25px
+}
+
+@media screen and (max-width: 500px) {
+  .PhotoInspoAllPalette {
+  margin-right: 20px;
+  max-width: 100px;
+  height: fit-content;
+  width: fit-content;
+  border-radius: 10px;
+  }
+  .boxAllPalettes {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    width: 80%;
+    background-color: #fcfbf6;
+    border-radius: 10px;
+    margin-top: 3vh;
+    margin-left: 10%;
+  }
+  .paletteAllPalettes {
+    width: 3rem;
+    height: 3rem;
+    transform: matrix(0, -1, -1, 0, 0, 0);
+  }
+  .containerCarousel{
+    margin-bottom:50px;
+    margin-top:50px;
+  }
+}
