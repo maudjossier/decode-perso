@@ -23,7 +23,7 @@ const [stateMob, setStateMob] = useState(false)
 
 var likeColor = ''
 
-useEffect(() => {
+/* useEffect(() => {
   if (props.token) {
   async function wishlistData() {
     const rawResponse = await fetch('/wishlist', {
@@ -36,7 +36,7 @@ useEffect(() => {
    props.addToWishlist(body.wishlist)
   }
   wishlistData() }
-},[]) 
+},[]) */ 
 
 ////////// CHERCHER LES ARTICLES EN BDD  //////////
 useEffect( () => {
