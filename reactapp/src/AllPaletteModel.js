@@ -31,7 +31,7 @@ function AllPaletteModel(props) {
       <Carousel >
         <Carousel.Item className="carouselAllPalettes">
           <div style={{display:'flex', justifyContent:'center', width:'100%'}}> 
-              <div style={{padding: '10px',height:'350px', width:'300px', backgroudColor: 'white',  display: 'flex', justifyContent:'space-evenly',alignItems:"center", width:'80%' }}>
+              <div className="containerItem">
                   <img
                   className="PhotoInspoAllPalette"
                   key={0}
@@ -59,7 +59,7 @@ function AllPaletteModel(props) {
 
             <Carousel.Item className="carouselAllPalettes">
           <div style={{display:'flex', justifyContent:'center', width:'100%'}}> 
-              <div style={{padding: '10px',height:'350px', width:'300px', backgroudColor: 'white',  display: 'flex', justifyContent:'space-evenly',alignItems:"center", width:'80%' }}>
+              <div className="containerItem">
                   <img
                   className="PhotoInspoAllPalette"
                   key={3}
