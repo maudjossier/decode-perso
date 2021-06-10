@@ -13,21 +13,20 @@ router.get("/", async (req, res, next) => {
 });
 
 router.post('/signUp', async (req, res, next) => {
-  console.log('req.body.paletteFromStore._id', req.body)
   var error = []
   var saveUser = null
   var result = false
   var token = null
 
-  
+  // vérification de la présence ou non de l'email dans la BDD
   const data = await userModel.findOne({
     email: req.body.emailFromFront,
   });
-
   if (data != null) {
     error.push("Utilisateur déjà présent");
   }
 
+  // vérification du bon remplissage des champs
   if (
     req.body.usernameFromFront == "" ||
     req.body.emailFromFront == "" ||
@@ -36,15 +35,22 @@ router.post('/signUp', async (req, res, next) => {
     error.push("Champs vides");
   }
 
+  // vérification de la validité de l'email 
+  var emailRegex = new RegExp(/^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/)
+  var isEmailValid = emailRegex.test(req.body.emailFromFront); 
+  if (isEmailValid === false ) { 
+    error.push('Merci de rentrer un email valide')
+  }
+ 
+   // vérification si l'utilisateur a bien répondu au questionnaire
   if (
     req.body.paletteFromStore === 'undefined' 
     ) {
       error.push('Répondez au questionnaire avant de vous inscrire')
     }
   
-  
+  // si aucune erreur, l'utilisateur est inscrit dans la base de données
   if(error.length == 0){
-console.log('body palette', req.body.paletteFromStore)
       var hash = bcrypt.hashSync(req.body.passwordFromFront, 10); 
       var newUser = new userModel({
       firstName: req.body.usernameFromFront,
@@ -57,16 +63,16 @@ console.log('body palette', req.body.paletteFromStore)
   
     saveUser = await newUser.save();
    /*  await saveUser.updateOne({palette : idPalette}) */
-    console.log('id recu', saveUser)
-    console.log('tout palette', saveUser.palette)
-    
+
+  // si enregistrement en BDD ok, on renvoie au front
     if(saveUser){
       result = true
       token = saveUser.token
-    }
+      res.json({result, saveUser, token})
+    } else {res.json({result, error});}
   }
 
-  res.json({ result, error, saveUser, token });
+  
 });
 
 router.post("/signIn", async (req, res) => {
@@ -75,10 +81,12 @@ router.post("/signIn", async (req, res) => {
   var error = [];
   var token = null;
 
+  // verification du bon remplissage des champs
   if (req.body.emailFromFront == "" || req.body.passwordFromFront == "") {
     error.push("Champs vides");
   }
 
+  // si pas d'erreur, recherche de l'email en BDD, puis de l'adéquation mdp/email
   if (error.length == 0) {
     const userIsFound = await userModel.findOne({
       email: req.body.emailFromFront,
@@ -110,12 +118,12 @@ router.post("/signIn", async (req, res) => {
 });
 
 router.post("/validerQuiz", async (req, res, next) => {
-  ///////////////// QUESTIONNAIRE ////////////
   var result = false;
   var userPalette = null;
   var isConnected = false
   if (req.body.token !== null ) { isConnected = true} 
  
+  ///////// ALGORITHME DU QUESTIONNAIRE ///////
   var responses = [req.body.rep1, req.body.rep2, req.body.rep3, req.body.rep4, req.body.rep5, req.body.rep6, req.body.rep7]  
 
   var palette1 = 0;
@@ -123,6 +131,7 @@ router.post("/validerQuiz", async (req, res, next) => {
   var palette3 = 0;
   var palette4 = 0;
 
+  //compteur des réponses reçues
   for (var i = 0; i < responses.length; i++) {
     if (responses[i] === "ethnique") {
       palette1++;
@@ -135,6 +144,7 @@ router.post("/validerQuiz", async (req, res, next) => {
     }
   }
 
+  // question plus forte pour départager si jamais il avait eu égalité
   if (responses[2] === "ethnique") {
     palette1 += 2;
   } else if (responses[2] === "bohème") {
@@ -145,6 +155,7 @@ router.post("/validerQuiz", async (req, res, next) => {
     palette4 += 2;
   }
 
+  // adéquation compteur et nom de palette 
   var compteursArray = [
     { palette: "ethnique", compteur: palette1 },
     { palette: "bohème", compteur: palette2 },
@@ -152,6 +163,7 @@ router.post("/validerQuiz", async (req, res, next) => {
     { palette: "modernMinimal", compteur: palette4 },
   ];
 
+  // arrangement des résultats par ordre de grandeur 
   var sortedResults = compteursArray.sort(function compare(a, b) {
     if (a.compteur < b.compteur)
        return -1;
@@ -166,26 +178,26 @@ router.post("/validerQuiz", async (req, res, next) => {
 
  /////////////////////// TROUVER LA PALETTE EN BDD ////////////////
 
-  var userPalette = await paletteModel.findOne(    // find palette dans la bdd 
+ // find palette dans la bdd avec le nom donné par le résultat de l'algo
+  var userPalette = await paletteModel.findOne(    
   {name: resultquizz})
 
+  // si l'utilisateur n'est pas connecté on renvoit juste la palette 
  if (isConnected === false){
-    console.log('userpalette ', userPalette)
     if (userPalette) 
     {result = true; res.json({result, userPalette})}
      else {res.json({result})}  
    } 
    else  {  
-
+ // si l'utilisteur est connecté on modifie la clé étrangère 'palette' de l'utilisateur 
       var userUpdated = await userModel.updateOne( 
         {token: req.body.token},
         {palette: userPalette._id}
       ) 
-        console.log('userUpdated', userUpdated)
-      if (userUpdated) { result = true; res.json({result, userPalette}) }
+      if (userUpdated) 
+      { result = true; res.json({result, userPalette}) }
       else {res.json({result})} 
    }
-
   });
  
 
@@ -197,8 +209,6 @@ router.post("/myPalette", async (req, res, next) => {
       var user = await userModel.       // populate pour aller récupére la palette 
       findById(userForId._id)
       .populate('palette')
-      console.log('user et sa palette', user.palette)
-  
     res.json({userPalette: user.palette})}
 
     else {
@@ -210,10 +220,12 @@ router.post("/myShoppingList", async (req, res) => {
   var result = false;
   var paletteFromFront = req.body.paletteName;
 
+  // trouver les articles avec le nom de la palette de l'utilisateur 
   var shoppingList = await articleModel.find({
     paletteName: paletteFromFront,
   });
 
+  // si les articles ont été trouvés, on renvoit les articles 
   if (shoppingList) {
     result = true;
     res.json({ result, shoppingList });
@@ -225,15 +237,18 @@ router.post("/myShoppingList", async (req, res) => {
 router.post("/addToWishlist", async (req, res) => {
   var result = false;
   article = req.body.articleID;
-  console.log('id article:', article)
+
+  // trouver l'utilisateur pour récupérer son id
   const findUser = await userModel.findOne({token: req.body.token})
 
+  // modifier la wishlist 
   var updateUser = await userModel.updateOne(
     { token: req.body.token },
     {$push: 
     {wishlist: article}
     } );
 
+  // aller chercher les articles en wishilist par leurs clés étrangères
   var user = await userModel
     .findById(findUser._id)
     .populate("wishlist")
@@ -241,6 +256,7 @@ router.post("/addToWishlist", async (req, res) => {
 
   var wishlist = user.wishlist;
 
+  // si la modification a bien été fait, on renvoit la wishlist mise à jour 
   if (updateUser.n !=0){
     result=true
     res.json({ result, wishlist })
@@ -249,34 +265,15 @@ router.post("/addToWishlist", async (req, res) => {
   }
 });
 
-router.post("/wishlist", async (req, res) => {
-  var result = false; 
-  var findUser = await userModel.findOne({token: req.body.token})
-  console.log('find user', findUser)
-  var user = await userModel
-    .findById(findUser._id)
-    .populate("wishlist")
-    .exec();
-
-  var wishlist = user.wishlist;
-  
-  if (wishlist.lenght != 0) {
-    result = true;
-    res.json({ result, wishlist });
-  } else {
-    result = false;
-    res.json({ result });
-  }
-});
 
 router.put("/deleteFromWishlist", async (req, res) => {
   var result = false;
-  console.log(req.body.token)
 
+  // récupérer l'id utilisateur 
   const myUser = await userModel.findOne(
     {token : req.body.token}
   )
-
+  // retirer un article de la wishlist par sa clé étrangère  
   var update = await userModel.updateOne(
     {token : req.body.token}, 
     {$pull: 
@@ -284,14 +281,7 @@ router.put("/deleteFromWishlist", async (req, res) => {
     }
   )
 
- /* var UserWishlist = myUser.wishlist
-  UserWishlist.splice(req.body.index, 1 )
-
-  const update = await userModel.updateOne(
-    {token: req.body.token},
-     {wishlist : UserWishlist}
-  ) */
-
+// populate la wishlist pour renvoyer son contenu mis à jour 
   var user = await userModel
     .findById(myUser._id)
     .populate("wishlist")
@@ -299,8 +289,8 @@ router.put("/deleteFromWishlist", async (req, res) => {
 
   var wishlist = user.wishlist
 
+  // si la modificiation a bien été faite on renvoit le nouveau résultat 
   if (update.nModified != 0 ){
-    console.log(update)
     result = true 
   res.json({result, wishlist})
   } else {

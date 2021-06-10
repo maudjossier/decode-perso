@@ -113,7 +113,7 @@ function Login(props) {
                 <Col lg={4} md={12} xs={12} className='connexion'>
                 Connexion
                         <div className='formLogin'>
-                            <Input onChange={(e) => setSignInEmail(e.target.value)} type="text" name="emailFromFront" placeholder='Email' className='input_login' />
+                            <Input onChange={(e) => setSignInEmail(e.target.value)} type="email" name="emailFromFront" placeholder='Email' className='input_login' />
                             <div style={{display:'flex'}}>
                             <Input.Password onKeyPress={handleKeypress} onChange={(e) => setSignInPassword(e.target.value)}  name="passwordFromFront" placeholder='Mot de passe' className='input_login'/>
                             </div>
@@ -133,7 +133,7 @@ function Login(props) {
                     Inscription
                         <div className='formLogin'>
                             <Input onChange={(e) => setSignUpUsername(e.target.value)} type="text" name="usernameFromFront" placeholder='Prénom' className='input_login' />
-                            <Input onChange={(e) => setSignUpEmail(e.target.value)} type="text" name="emailFromFront" placeholder='Email' className='input_login'/>
+                            <Input onChange={(e) => setSignUpEmail(e.target.value)} type="email" name="emailFromFront" placeholder='Email' className='input_login'/>
                             <Input.Password onKeyPress={handleKeypress2} onChange={(e) => setSignUpPassword(e.target.value)} name="passwordFromFront" placeholder='Mot de passe' className='input_login' />
                         </div>
                         <div>
