@@ -2,155 +2,111 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import NavBar from "./navbar";
 import { connect } from "react-redux";
-import copy from 'copy-to-clipboard';
-import { Popover, notification } from 'antd';
-import 'bootstrap/dist/css/bootstrap.min.css'
-import {Container, Row, Col } from 'react-bootstrap';
-
-
+import copy from "copy-to-clipboard";
+import { Popover, notification } from "antd";
+import "bootstrap/dist/css/bootstrap.min.css";
+import { Container, Row, Col } from "react-bootstrap";
 
 function MyPalette(props) {
   const [palette, setPalette] = useState(props.userPaletteFromStore);
-  
 
-  /* useEffect(() => {
-    console.log('dans state', props.token)
-    props.addPalette('')
-    if (props.token !== null){
-      console.log('on a un token')
-      setisConnected(true)
-    async function fetchData() {
-        const data = await fetch("/myPalette", {
-          method: "POST",
-          headers: { "Content-Type": "application/x-www-form-urlencoded" },
-          body: `token=${props.token}`,
-        });
-
-        var body = await data.json();
-        setPalette(body.userPalette);
-        props.addPalette(body.userPalette)
-    }
-    fetchData();
-  } 
-  else if (isConnected === false) {
-    console.log('pas connecté')
-  } 
-    
-  }, []); */
-
-  useEffect(() => {
-    console.log('palette ds useeffect',props.userPaletteFromStore)
+  useEffect(() => {     // Modifie la palette affichée si celle dans le store ou le token utilisateur change 
     setPalette(props.userPaletteFromStore);
-
   }, [props.userPaletteFromStore, props.token]);
- 
-  
-  var handleClickCopyCode = (data) => {
 
+  /////// GESTION DU COPY DU CODE HEX ///////
+  var handleClickCopyCode = (data) => {
     copy(`${data}`, {
       debug: true,
-      message: 'Press #{key} to copy',
+      message: "Press #{key} to copy",
     });
- 
-  }
-
-
-  const openNotification = () => {
-    notification.open({
-      message: 'Code copié !',
-      className:"notifcopy",
-      style: {
-        width: 200
-      },
-      onClick: () => {
-        console.log('Notification Clicked!');
-      },
-    });
-
-    
   };
-  
-  const content = (
+
+  const content = (   // contenu du popover au hover d'une couleur 
     <div>
-      <p style={{fontSize:'12px', marginBottom: '0px'}}>Cliquez pour copier le code hex</p>
+      <p style={{ fontSize: "12px", marginBottom: "0px" }}>
+        Cliquez pour copier le code hex
+      </p>
     </div>
   );
 
-  if (palette) {
-    var paletteName = palette.name;
-      if (paletteName === "artDeco") {
-        paletteName = "Art Déco".toUpperCase();
-      } else if (paletteName === "ethnique") {
-        paletteName = "Ethnique".toUpperCase();
-      } else if (paletteName === "bohème") {
-        paletteName = "Bohème".toUpperCase();
-      } else if (paletteName === "modernMinimal") {
-        paletteName = "Modern Minimal".toUpperCase();
-      }  
+  /////// NOTIFICATION SUITE AU COPY ///////
+  const openNotification = () => {
+    notification.open({
+      message: "Code copié !",
+      className: "notifcopy",
+      style: {width: 200}
+    });
+  };
 
-  var tabPaletteColor = props.userPaletteFromStore.colors.map((data, i) => {
-    return (
-      <Popover key={i} content={content} trigger="hover" placement="bottomRight">
-        <Col md={4} lg={2} xs={2}  > 
-        <div  key={i} style={{ backgroundColor: data , cursor:'pointer'}} className="palette" onClick={()=> {handleClickCopyCode(data);openNotification()}}>
-          <p className="textColorPalette">{data}</p>
-        </div>
-        </Col>
-      </Popover>
+ 
+  
+  if (palette) {   // si il y a une palette dans le store  
+    var paletteName = palette.name;     // affichage du nom de la palette 
+    if (paletteName === "artDeco") {
+      paletteName = "Art Déco"
+    } else if (paletteName === "ethnique") {
+      paletteName = "Ethnique"
+    } else if (paletteName === "bohème") {
+      paletteName = "Bohème"
+    } else if (paletteName === "modernMinimal") {
+      paletteName = "Modern Minimal"
+    }
+
+    var tabPaletteColor = props.userPaletteFromStore.colors.map((data, i) => {      // AFFICHAGE DES COULEURS DE LA PALETTE
+      return (
+        <Popover key={i} content={content} trigger="hover" placement="bottomRight">
+          <Col md={4} lg={2} xs={2}>
+            <div key={i} style={{ backgroundColor: data, cursor: "pointer" }} className="palette" onClick={() => {handleClickCopyCode(data); openNotification();}}>
+              <p className="textColorPalette">{data}</p>
+            </div>
+          </Col>
+        </Popover>
       );
     });
 
-     return (
-    <div style={{ height: "110vh" }} className="background">
-      <NavBar />
-      <div className="containerMypalette"> 
-        <div className="MypaletteBox">
-        <h3 className="h3Mypalette">VOTRE PALETTE :  {paletteName} </h3>
-        <div className="traitMypalette"></div>
-        <Container style={{display:'flex', justifyContent:'center', alignItems:'center'}}> 
-        <Row className='RowPalette'>
-           {tabPaletteColor}
-        </Row>
-        </Container>
-      </div>
-      <p className="descriptionMypalette">{palette.description}</p>
-      <Link to="/shoppinglist">
-        <button className="inputMypalette">Découvrir ma shopping-list</button>
-      </Link>  
-      </div>
-    </div>
-  );
-    
-  }  else {return (
-    <div style={{ height: "110vh" }} className="background">
-      <NavBar />
+    return (
+      <div style={{ height: "110vh" }} className="background">
+        <NavBar />
         <div className="containerMypalette">
-        <h3 className="h3Mypalette">VOTRE PALETTE : </h3>
-        <div className="traitMypalette"></div>
-        <div style={{ display: "flex", flexDirection: "row" }}> 
+
+          <div className="MypaletteBox">
+            <h3 className="h3Mypalette">VOTRE PALETTE : {paletteName.toUpperCase()} </h3>
+            <div className="traitMypalette"></div>
+            <Container style={{display: "flex",justifyContent: "center",alignItems: "center"}}>
+              <Row className="RowPalette">{tabPaletteColor}</Row>
+            </Container>
+          </div>
+
+          <p className="descriptionMypalette">{palette.description}</p>
+
+          <Link to="/shoppinglist">
+            <button className="inputMypalette">
+              Découvrir ma shopping-list
+            </button>
+          </Link>
+
         </div>
       </div>
-      <p className="descriptionMypalette"></p>
-      <Link to="/shoppinglist">
-        <button className="inputMypalette">Découvrir ma shopping-list</button>
-      </Link>  
-    </div>
-  ); }
- 
-  
+    );
+  } else {
+    return (    // si pas de palette dans le store 
+      <div style={{ height: "110vh" }} className="background">
+        <NavBar/>
+      </div>
+    );
+  }
 }
-
 
 function mapStateToProps(state) {
   return { userPaletteFromStore: state.palette, token: state.token };
- 
 }
-function mapDispatchToProps(dispatch){
+function mapDispatchToProps(dispatch) {
   return {
-    addPalette: function(palette){
-      dispatch({type: 'addPalette', palette: palette})
-    }, 
-  }
+    addPalette: function (palette) {
+      dispatch({ type: "addPalette", palette: palette });
+    },
+  };
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(MyPalette);

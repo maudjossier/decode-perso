@@ -10,7 +10,7 @@ import wishlist from './reducers/wishlist'
 import userName from './reducers/user'
 
 
-import Home from './ScreenHomeCopy';
+import Home from './ScreenHome';
 import Quiz from './ScreenQuizz';
 import MyPalette from './ScreenMyPalette';
 
@@ -22,14 +22,14 @@ import NavBar from './navbar'
 import NavbarFixed from './navbarFixed'
 
 
-import { CookiesProvider } from 'react-cookie'
+
 
 const store = createStore(combineReducers({token, palette, wishlist, userName}))
 
 function App() {
 
   return (
-    <CookiesProvider> 
+   
     <Provider store={store}>
     <Router>
     <Switch>
@@ -46,7 +46,7 @@ function App() {
     </Switch>
   </Router>
   </Provider>
-  </CookiesProvider>
+ 
   );
 }
 

@@ -1,4 +1,4 @@
-export default function(userName = null, action){
+export default function Username(userName = null, action){
     if(action.type === 'userStoreSignUp'){
     var userToUpperCase = action.userName[0].toUpperCase() + action.userName.slice(1)
         return userToUpperCase

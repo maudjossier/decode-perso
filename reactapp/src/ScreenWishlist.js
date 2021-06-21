@@ -8,57 +8,35 @@ import NavbarFixed from './navbarFixed';
 
 
 function Wishlist(props) {
-  
-  const [wishlist, setWishlist] = useState([props.wishlist])
-  console.log(props.token)
-  
-
-/*  useEffect(() => {
-  if (props.token) {
-  async function wishlistData() {
-    const rawResponse = await fetch('/wishlist', {
-      method: 'POST',
-      headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-      body: `token=${props.token}`
-    })
-    const body = await rawResponse.json()
-   console.log('body bdd wishlist', body)
-   setWishlist(body.wishlist)
-   props.addToWishlist(body.wishlist)
-  }
-  wishlistData() }
-},[])  */
+const [wishlist, setWishlist] = useState([props.wishlist])
 
 useEffect(() => {
-  setWishlist(props.wishlist)
+  setWishlist(props.wishlist) // mise à jour de la wishlist sur la mise à jour du store 
 }, [props.wishlist])
 
- var handleClickDelete = async (articleID, index) => {
-  const deleteArticle = await fetch('/deleteFromWishlist', {
+ var handleClickDelete = async (articleID, index) => {  // gestion de la suppression des articles en BDD et store 
+    await fetch('/deleteFromWishlist', {
     method: 'PUT',
     headers: {'Content-Type': 'application/x-www-form-urlencoded'},
     body: `token=${props.token}&articleID=${articleID}`
   })
-  const response = await deleteArticle.json()
-  console.log('update recue ', response)
- 
   props.deleteArticle(index)
  } 
 
-
+//////// MAP DES ARTICLES EN WISHLIST ////////
 var displayWishlist = wishlist.map((article,i) => {
- 
   return (
     <Col md={2}lg={2} className="cardWishlist" > 
-    <a href={article.merchantUrl} target="_blank">
-    <div  className='productImage' >
-      <img style={{maxWidth:'100%', maxHeight: '100%'}} src={article.imageUrl}  alt='product' /> 
-      {/* image + picto coeur  */}
-    </div>
-    </a>
+      <a href={article.merchantUrl} target="_blank" rel="noreferrer">
+       <div  className='productImage' >
+         <img style={{maxWidth:'100%', maxHeight: '100%'}} src={article.imageUrl}  alt='product' /> 
+        </div>
+      </a>
     <div className="productInfo"> 
       <div className="infoWishlist"> 
-       <a href={article.merchantUrl} target="_blank"> <h5 className='articleWishList'> {article.name} </h5></a>
+       <a href={article.merchantUrl} target="_blank" rel="noreferrer"> 
+        <h5 className='articleWishList'> {article.name} </h5>
+       </a>
         <h6 className='articleCardBrand'> {article.brand} </h6>
       </div>
       <div className="priceWishlist" > 
@@ -71,68 +49,69 @@ var displayWishlist = wishlist.map((article,i) => {
 
 })
   
-if (wishlist.length !== 0){
+if (wishlist.length !== 0){     // SI LA WISHLIST EST N'EST PAS VIDE 
     return (
       <div className='backgroundWishlist'>
       <NavbarFixed />
-      
       <div className="greenBar"></div>
+
+
       <div  style={{backgroundColor:'#FCFBF6', paddingTop: '11px'}}> 
-      
-      <div style={{display: 'flex', justifyContent: 'flex-end'}}>
-      <Link to="/shoppinglist">
-            <button className="inputWishlist">Voir ma shopping list</button>
-      </Link>
-      </div>
+
+        <div style={{display: 'flex', justifyContent: 'flex-end'}}>
+          <Link to="/shoppinglist">
+              <button className="inputWishlist">Voir ma shopping list</button>
+          </Link>
+        </div>
        
      
-      <Container className="containerWishlistCard" > 
-      <div className="wishlist-text" > 
-        <div className="wishlist-title">
-        <h4 className="h4style">
-            VOTRE WISHLIST
-        </h4>
-        </div>
-        <div> 
-        <h4 style={{fontSize: '15px'}}>{props.wishlist.length} articles</h4>
-        </div>
-
-      </div>
+        <Container className="containerWishlistCard" > 
+          <div className="wishlist-text" > 
+              <div className="wishlist-title">
+                <h4 className="h4style">
+                VOTRE WISHLIST
+                </h4>
+              </div>
+              <div> 
+                <h4 style={{fontSize: '15px'}}>{props.wishlist.length} articles</h4>
+              </div>
+          </div>
        
           <Row  style={{ display:'flex', justifyContent: 'center'}}> 
             {displayWishlist}
           </Row>
+
         </Container> 
-      </div>  
+        </div>  
       </div>
       
     );}
-    else if (props.token !== null) {
+    else if (props.token !== null) {  //SI USER CONNECTE MAIS WISHLIST VIDE 
       return ( 
       <div className="background">
-      <NavbarFixed />
-    <div style={{height: '17vh', backgroundColor: '#203126'}}></div>
-    <div style={{dislpay:'flex', backgroundColor:'#FCFBF6',paddingTop:'3vh', paddingBottom:'3vh', height:'100vh' }}> 
-      <p className="messageWishlist" >Wishlist vide</p> 
-      <Link style={{display: 'flex', justifyContent:'center', alignItems: 'center'}} to="/shoppinglist">
-          <button className="inputWishlistNonConnecte">Voir ma shopping list</button>
-      </Link>
-      
-    </div>  
+        <NavbarFixed />
+        <div style={{height: '17vh', backgroundColor: '#203126'}}></div>
+
+        <div style={{dislpay:'flex', backgroundColor:'#FCFBF6',paddingTop:'3vh', paddingBottom:'3vh', height:'100vh' }}> 
+          <p className="messageWishlist" >Wishlist vide</p> 
+            <Link style={{display: 'flex', justifyContent:'center', alignItems: 'center'}} to="/shoppinglist">
+              <button className="inputWishlistNonConnecte">Voir ma shopping list</button>
+            </Link>
+        </div>  
     </div>
     ) 
-    } else  { 
+    } else  {   // SI USER NON CONNECTE  
       return (
-  <div className="background">
-    <NavbarFixed />
-    <div style={{height: '17vh', backgroundColor: '#203126'}}></div>
-    <div  style={{dislpay:'flex', justifyContent:'center', alignItems: 'center',backgroundColor:'#FCFBF6',paddingTop:'3vh', paddingBottom:'3vh', height:'100vh' }}> 
-      <p className="messageWishlist" >Connectez vous pour accéder à votre wishlist</p> 
-      <Link style={{display: 'flex', justifyContent:'center', alignItems: 'center'}} to="/login">
-            <button className="inputWishlistNonConnecte">Connectez-vous</button>
-      </Link>
-    </div>  
-    </div>
+      <div className="background">
+        <NavbarFixed />
+        <div style={{height: '17vh', backgroundColor: '#203126'}}></div>
+        <div  style={{dislpay:'flex', justifyContent:'center', alignItems: 'center',backgroundColor:'#FCFBF6',paddingTop:'3vh', paddingBottom:'3vh', height:'100vh' }}> 
+          <p className="messageWishlist" >Connectez vous pour accéder à votre wishlist</p> 
+          <Link style={{display: 'flex', justifyContent:'center', alignItems: 'center'}} to="/login">
+              <button className="inputWishlistNonConnecte">Connectez-vous</button>
+          </Link>
+        </div>  
+        </div>
       )
     }
   }

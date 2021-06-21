@@ -124,6 +124,7 @@ router.post("/validerQuiz", async (req, res, next) => {
   if (req.body.token !== null ) { isConnected = true} 
  
   ///////// ALGORITHME DU QUESTIONNAIRE ///////
+  console.log('body', req.body)
   var responses = [req.body.rep1, req.body.rep2, req.body.rep3, req.body.rep4, req.body.rep5, req.body.rep6, req.body.rep7]  
 
   var palette1 = 0;

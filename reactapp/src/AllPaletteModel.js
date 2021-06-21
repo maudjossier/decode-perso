@@ -66,15 +66,12 @@ function AllPaletteModel(props) {
                     src={props.inspirations[3]}
                     alt="Second slide"
                   />
-          
-          
                   <img
                   className="PhotoInspoAllPalette"
                   key={4}
                     src={props.inspirations[4]}
                     alt="Second slide"
                   />
-           
                   <img
                   className="PhotoInspoAllPalette"
                     key={5}

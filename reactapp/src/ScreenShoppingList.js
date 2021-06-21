@@ -12,7 +12,6 @@ import { Popover, Button, Checkbox } from 'antd';
 
 
 function ShoppingList(props) {
-const [userPalette, setUserPalette] = useState(props.userPaletteFromStore)
 const [articleList, setArticleList] = useState([])
 const [articleListFromBDD, setArticleListFromBDD] = useState([])
 const [wishlist, setWishlist] = useState(props.userWishlist)
@@ -21,41 +20,27 @@ const [FilterMobilier, setFilterMobilier] = useState(false)
 const [stateDeco, setStateDeco] = useState(false)
 const [stateMob, setStateMob] = useState(false)
 
-var likeColor = ''
 
-/* useEffect(() => {
-  if (props.token) {
-  async function wishlistData() {
-    const rawResponse = await fetch('/wishlist', {
-      method: 'POST',
-      headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-      body: `token=${props.token}`
-    })
-    const body = await rawResponse.json()
-   setWishlist(body.wishlist)
-   props.addToWishlist(body.wishlist)
-  }
-  wishlistData() }
-},[]) */ 
+var userPalette = props.userPaletteFromStore
+
+var likeColor = ''      // gestion de la couleur des picto coeur si dans wishlist 
 
 ////////// CHERCHER LES ARTICLES EN BDD  //////////
 useEffect( () => {
-  
   async function loadData() { 
     const rawResponse = await fetch('/myShoppingList', {
       method: 'POST',
       headers: {'Content-Type': 'application/x-www-form-urlencoded'},
       body: `paletteName=${userPalette.name}`
     })
-    const body = await rawResponse.json()
-    setArticleList(body.shoppingList)
-    setArticleListFromBDD(body.shoppingList)  // Mettre les articles dans un état ArticleList
+    const body = await rawResponse.json()     
+    setArticleList(body.shoppingList)   // Mettre les articles dans un état dynamique qui va être utilisé pour filtrer 
+    setArticleListFromBDD(body.shoppingList)  // Mettre les articles dans un état ArticleListFromBDD qui ne changera pas 
   }
   loadData()
   
  }, []);
 
- 
 
  useEffect( () => {
   setWishlist(props.wishlist)
@@ -65,10 +50,9 @@ useEffect( () => {
 
  ////////// AJOUTER OU SUPPRIMER UN ARTICLE EN WISHLIST  //////////
  var handleClickWishList = (articleID) => {
-  
-      var resultFilter = wishlist.find(wishlist => wishlist._id === articleID)
+    var resultFilter = wishlist.find(wishlist => wishlist._id === articleID)   // vérification que l'article existe en wishlist avec son id 
 
-      if (!resultFilter) { 
+      if (!resultFilter) {      // l'article n'est pas en wishlist, on l'ajoute en BDD et au store 
       async function addToWishlist() {
         const rawResponse = await fetch('/addToWishlist', {
           method: "POST",
@@ -76,22 +60,19 @@ useEffect( () => {
           body: `token=${props.token}&articleID=${articleID}`,
         })
         const response = await rawResponse.json()
-        console.log('rajouté', response.wishlist)
-        props.addToWishlist(response.wishlist)
+        props.addToWishlist(response.wishlist)  // réponse : wishlist mise à jour 
       }
       addToWishlist()
 
-      } else { 
-        console.log('supprime')
-      async function deleteArticle() {
+      } else {      // l'article existe dans la wishlist, on le supprime en BDD et store 
+      async function deleteArticle() {    
         const deleteArticle = await fetch('/deleteFromWishlist', {
           method: 'PUT',
           headers: {'Content-Type': 'application/x-www-form-urlencoded'},
           body: `token=${props.token}&articleID=${articleID}`,
         })
-        const updateWishlist = await deleteArticle.json()
-        console.log('update', updateWishlist)
-        props.addToWishlist(updateWishlist.wishlist)
+        const updateWishlist = await deleteArticle.json() 
+        props.addToWishlist(updateWishlist.wishlist)  // réponse : wishlist mise à jour 
       }
       deleteArticle()
       } 
@@ -99,40 +80,38 @@ useEffect( () => {
 
  ////////////////// MAP DES ARTICLES TROUVES EN BDD /////////////////
  if (props.userPaletteFromStore === '' ) {        // si il n'y a rien dans la liste d'article, l'utilsateur n'a pas fait le quizz, donc redirect home
-return ( <Redirect to='/' /> )
-} else 
-{
-  var displayArticles = articleList.map((article, i) => {
-   
-    var wishlistFilter = props.wishlist.find(wishlist => wishlist.merchantUrl === article.merchantUrl)
-    
-
-    if (wishlistFilter) { 
-    likeColor =  "#A7430A"} else {
-      likeColor = "#000000"
-    }
-  
-      /////// pop over si pas connecté ////// 
- if (!props.token){
-  var popoverWishList = <Popover placement="bottomRight" content='Veuillez vous connecter pour ajouter un article à votre Wishlist' trigger="click">
-    <FontAwesomeIcon style={{cursor:'pointer', width: '15px'}} icon={faHeart}/>
-    </Popover>
+  return ( <Redirect to='/' /> )
 } else {
- popoverWishList = <FontAwesomeIcon onClick={() => handleClickWishList(article._id)} style={{cursor:'pointer', width: '15px'}} icon={faHeart} color={likeColor} />
-}  
+
+  var displayArticles = articleList.map((article, i) => {
+
+    var wishlistFilter = props.wishlist.find(wishlist => wishlist.merchantUrl === article.merchantUrl)  // trouver si l'article est dans la wishlist
+     if (wishlistFilter) { 
+        likeColor =  "#A7430A"} else {  // si il est dans la wishlist le picto coeur devient rouge 
+        likeColor = "#000000"
+      }
+        
+    if (props.token){    // si connecté le picto coeur permet l'ajout / suppression en wishlist 
+      var popoverWishList = <FontAwesomeIcon onClick={() => handleClickWishList(article._id)} style={{cursor:'pointer', width: '15px'}} icon={faHeart} color={likeColor} />
+    } else {
+    popoverWishList =  // pop over si pas connecté pour la wishlist 
+      <Popover placement="bottomRight" content='Veuillez vous connecter pour ajouter un article à votre Wishlist' trigger="click">
+        <FontAwesomeIcon style={{cursor:'pointer', width: '15px'}} icon={faHeart}/>
+      </Popover>
+    }   
   
 
   return ( 
-   <Col key={i} xs={10} md={6} lg={3} className="articleCard" > 
-    <a href={article.merchantUrl} target="_blank">
-    <div  className='productImage' >
-      <img style={{maxWidth:'100%', maxHeight: '100%'}} src={article.imageUrl}  alt='product' /> 
-      {/* image + picto coeur  */}
-    </div>
+   <Col key={i}  xs={10} md={4} lg={3} className="articleCard" > 
+    <a href={article.merchantUrl} target="_blank" rel="noreferrer">
+      <div  className='productImage' >
+        <img style={{maxWidth:'100%', maxHeight: '100%'}} src={article.imageUrl}  alt='product' /> 
+        {/* image + picto coeur  */}
+      </div>
     </a>
     <div className="productInfo" > 
       <div className="cardPartLeft"> 
-        <a href={article.merchantUrl} target="_blank">
+        <a href={article.merchantUrl} target="_blank" rel="noreferrer">
           <h5 className='articleCardTitle'> {article.name} </h5> 
         </a>
         <h6 className='articleCardBrand'> {article.brand} </h6>
@@ -142,9 +121,7 @@ return ( <Redirect to='/' /> )
         <p className='articleCardTitle'> {article.price}€ </p>
       </div>
     </div>
-    
   </Col>
-  
   )
 })
   
@@ -156,9 +133,9 @@ return ( <Redirect to='/' /> )
     )
 
    
-   /// map des inspirations /// 
+/// map des inspirations /// 
   var displayInspo = userPalette.inspirations.map((photo, i) => {
-    const content = (
+    const content = (     // popover de l'image en grand au hover 
       <img className="displayInspo" style={{minWidth:'400px', minHeight:'400px', maxWidth:'600px', maxHeight: '600px'}} src={photo} alt='inspo'/>
       )
     return (
@@ -172,41 +149,50 @@ return ( <Redirect to='/' /> )
       )}
       ) 
     
-      if (props.userPaletteFromStore) {
-        var paletteName = props.userPaletteFromStore.name;
-        if (paletteName === "artDeco") {
-          paletteName = "Art Déco".toUpperCase();
-        } else if (paletteName === "ethnique") {
-          paletteName = "Ethnique".toUpperCase();
-        } else if (paletteName === "bohème") {
-          paletteName = "Bohème".toUpperCase();
-        } else if (paletteName === "modernMinimal") {
-          paletteName = "Modern Minimal".toUpperCase();
-        } }
+ // gestion de l'affichage du nom de la palette ///
+  var paletteName = props.userPaletteFromStore.name;
+    if (paletteName === "artDeco") {
+        paletteName = "Art Déco"
+    } else if (paletteName === "ethnique") {
+          paletteName = "Ethnique"
+    } else if (paletteName === "bohème") {
+          paletteName = "Bohème"
+    } else if (paletteName === "modernMinimal") {
+          paletteName = "Modern Minimal"
+    } 
 
-//////////////// FILTER  ////////////////
-
+//////////////// FILTER  //////////////// 
 function onChangeDécoration(e) {
-  setArticleList(articleListFromBDD)
-  setFilterDeco(e.target.checked)
+  setArticleList(articleListFromBDD)  //  retour à la liste d'articles complète
+  setFilterDeco(e.target.checked)     // gestion du check 
 }
 function onChangeMobilier(e) {
-  setArticleList(articleListFromBDD)
-  setFilterMobilier(e.target.checked)
-  
+  setArticleList(articleListFromBDD)  
+  setFilterMobilier(e.target.checked)  
 }
 
-if (FilterDeco === true ) {
-  setStateMob(false)
-  setStateDeco(true)
-  var resultFilterDeco = articleList.filter(article => article.category === "décoration")
-  setArticleList(resultFilterDeco)
-  setFilterDeco(false)
-  
+/* function onChangeSetColor(color) {
+  setisCheckAllColors(false)
+  var whichFilter ; 
+  var resultFilterColor; 
+if ( stateDeco === true || stateMob === true ) {
+  if (stateDeco === true) { whichFilter = "décoration" } 
+  else { whichFilter = 'mobilier'} 
+ resultFilterColor = articleListFromBDD.filter(article => article.category === whichFilter && article.color === color)
+} else 
+  resultFilterColor = articleListFromBDD.filter(article =>  article.color === color)
+setArticleList(resultFilterColor)
+} */
 
+if (FilterDeco === true) {
+  setStateMob(false)       // gestion du check  
+  setStateDeco(true)       // gestion du check 
+  var resultFilterDeco = articleList.filter(article => article.category === "décoration")  // filter sur la catégorie 
+  setArticleList(resultFilterDeco)    // changement de l'état pour afficher le résultat du filtre 
+  setFilterDeco(false)   
 }
 
-if (FilterMobilier === true ) {
+if (FilterMobilier === true) {
   setStateDeco(false)
   setStateMob(true)
   var resultFilterMob = articleList.filter(article => article.category === "mobilier")
@@ -214,7 +200,7 @@ if (FilterMobilier === true ) {
   setFilterMobilier(false)
 }
 
-var handleClickReset = () => {
+var handleClickReset = () => {    // réinitialisation du filtre, tout passe à false et on remet la liste d'articles complète 
   setArticleList(articleListFromBDD)
   setStateDeco(false)
   setStateMob(false)
@@ -222,15 +208,48 @@ var handleClickReset = () => {
   setFilterDeco(false)
 }
 
+///////////// COULEURS //////////////// 
+
+/* var onChangeResetColor = () => {
+  setisCheckAllColors(true)
+  var whichFilter ; 
+  if ( stateDeco === true || stateMob === true ) {
+    if (stateDeco === true) { whichFilter = "décoration" } 
+    else { whichFilter = 'mobilier'} 
+   var resultFilter = articleListFromBDD.filter(article => article.category === whichFilter)
+   setArticleList(resultFilter)
+} else  {
+  setArticleList(articleListFromBDD)
+}
+} 
+
+function isUnique(item, position, array) {
+  return array.indexOf(item) === position;
+}
+
+ const colorList = []
+for (var i=0; i<articleListFromBDD.length; i++ ) {
+  colorList.push(articleListFromBDD[i].color)
+}
+var uniqueColorList = colorList.filter(isUnique); 
+
+var displayColors = uniqueColorList.map(function(color, i) {
+  return <Radio key={i} value={color} onChange={() =>{onChangeSetColor(color)}}> {color} </Radio>
+}) 
+ */
 var content = (
   <div style={{backgroundColor:'#fcfbf6'}}> 
     <h6 className="h6filter"> CATÉGORIES </h6>
-  <Checkbox  checked={stateMob} onChange={onChangeMobilier}>Mobilier</Checkbox>
-  <Checkbox  checked={stateDeco} onChange={onChangeDécoration}>Décoration</Checkbox>
+      <Checkbox  checked={stateMob} onChange={onChangeMobilier}>Mobilier</Checkbox>
+      <Checkbox  checked={stateDeco} onChange={onChangeDécoration}>Décoration</Checkbox>
+   {/*  <h6 className="h6filter"> COULEURS </h6>
+      <Radio.Group > 
+        {displayColors}
+        <Radio defaultChecked={true} checked={isCheckAllColors} onChange={onChangeResetColor}> Toutes les couleurs </Radio>
+      </Radio.Group> */}
   <p style={{color: 'grey', textDecoration: 'underline grey', marginBottom:'0px', textAlign:'center', cursor:'pointer'}} onClick={()=> handleClickReset()}> Réinitialiser le filtre </p>
   </div>
 )
-
 
 
   return (
@@ -254,8 +273,7 @@ var content = (
   {/* SELECTION D'ARTICLE */}
         <div className='ArticleShoppingList'> 
           <div className="TitleShoppingListContainer"> 
-            
-            <h4 className="h4style"> VOTRE SHOPPING LIST {paletteName}</h4>
+            <h4 className="h4style"> VOTRE SHOPPING LIST {paletteName.toUpperCase()}</h4>
             </div>
             {/* FILTRER  */}
             <div className='FilterContainer'> 
@@ -270,8 +288,8 @@ var content = (
   
       {/* SLIDER */}  
           <div className="scrollerShoppingList " > 
-            <Container className="containerArticles" lg={12} md={12} > 
-              <Row  className="rowArticles" lg={12} md={12}> 
+            <Container className="containerArticles"> 
+              <Row  className="rowArticles"> 
                 {displayArticles}
               </Row>
             </Container> 
@@ -305,11 +323,7 @@ var content = (
     </div> {/* fin div inspiration  */}
 
     </div> /* fin div background */
-  
-
-  
-  );
-   
+  );   
 }}
 
 function mapStateToProps(state) {

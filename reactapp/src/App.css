@@ -193,6 +193,11 @@ p {
   width:30px;
 }
 
+.navLink {
+  color: grey;
+  text-decoration: underline;
+}
+
 .imageBackground {
   background-image: url(background.png);
   height: 100vh;
@@ -378,7 +383,7 @@ transform: scale(1.1)
 
 @media screen and (max-width: 500px) {
   .imageBackground {
-    background-image: url(1b6be39272af342e96dfd83697910242.jpeg);
+    background-image: url(background-mobile.jpeg);
     padding-top: 100px;
     display:flex; 
     align-items: center;
@@ -907,6 +912,7 @@ margin-bottom:15px;
 .rowArticles {
   display: flex;
   justify-content: center;
+  width:100vw
 }
 
 .scrollShoppingList {

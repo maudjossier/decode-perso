@@ -1,4 +1,4 @@
-export default function(palette = "", action){
+export default function Palette(palette = "", action){
     if(action.type === 'addPalette'){
         console.log('palette ajoutée')
         var addPaletteCopy = action.palette

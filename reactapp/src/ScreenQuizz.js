@@ -3,7 +3,7 @@ import {Redirect} from "react-router-dom";
 import NavBar from "./navbar";
 import {connect} from 'react-redux';
 import 'bootstrap/dist/css/bootstrap.min.css'
-import {Container, Row, Col } from 'react-bootstrap';
+import {Row, Col } from 'react-bootstrap';
 
 
 
@@ -19,7 +19,7 @@ function Quiz(props) {
   const [error, setError] = useState('')
   const [buttonValider, setButtonValider] = useState(false)
   
-
+    // données du qestionnaire 
   var dataQuestions = [
       {question : 'Parmi ces matériaux et tissus, lequel préférez-vous ?', 
         photo1: {
@@ -122,57 +122,59 @@ function Quiz(props) {
         },
   ]
 
-  
+  // affichage dynamique des questions et réponses basé sur le nombre de click sur les boutons suivant / retour 
   var currentQuestion = dataQuestions[clickCount]
  
 
-    var  handleClickIncreaseWidth = () => {
-        if (isPhoto1Selected === true || isPhoto2Selected === true || isPhoto3Selected === true || isPhoto4Selected === true ) {
-        if (answersArray[clickCount] === undefined ){        // si premier clic 
-        var copy = answersArray 
-        copy.push(answer)}
-        else if (answersArray[clickCount]) {                // si revient en arrière modifie la valeur 
+  /////////// AU CLICK SUR LE BOUTON ">>" ///////////
+  var  handleClickIncreaseWidth = () => {
+        // si l'une des réponses est sélectionnée 
+    if (isPhoto1Selected === true || isPhoto2Selected === true || isPhoto3Selected === true || isPhoto4Selected === true ) {
+        if (answersArray[clickCount] === undefined ){        // si il s'agit du premier clic : on enregistre la réponse 
+            var copy = answersArray 
+            copy.push(answer)
+            } else if (answersArray[clickCount]) {                // si revient en arrière modifie la valeur
             answersArray[clickCount] = answer 
-        }
+            }
         setCount(clickCount+1)
         setProgressBarWidth(progressBarWidth+14)           //  barre de progression    
-        set_isPhoto1Selected(false); set_isPhoto2Selected(false);set_isPhoto3Selected(false);set_isPhoto4Selected(false)
+        set_isPhoto1Selected(false); set_isPhoto2Selected(false);set_isPhoto3Selected(false);set_isPhoto4Selected(false)    // déselection des images
         setError('')
-    } else  { setError('Merci de sélectionner une réponse') }
+    } else  { setError('Merci de sélectionner une réponse') }  // si pas de réponse sélectionnée
     }
 
-    var handleClickDecreaseWidth = () => {
-        setProgressBarWidth(progressBarWidth-185)
-        if (clickCount !== 0 ) {
-            setCount(clickCount-1)} 
+  /////////// AU CLICK SUR LE BOUTON "<<" ///////////
+  var handleClickDecreaseWidth = () => {          // gestion de la barre de progression décrémentant
+        setProgressBarWidth(progressBarWidth-14)
+        if (clickCount !== 0 ) {                // gestion du compteur de click / affichage question
+            setCount(clickCount-1)}             // suppression du message d'erreur
             setError('')
     } 
 
-    var handleClickValider = async () => {
-        props.addPalette('')
+  /////////// AU CLICK SUR LE BOUTON "VALIDER"  ///////////
+  var handleClickValider = async () => {
+        props.addPalette('')      // supprime le lag d'affichage de la dernière palette en store sur la page suivante   
+                // même vérification que pour le bouton '>>'
         if (isPhoto1Selected === true || isPhoto2Selected === true || isPhoto3Selected === true || isPhoto4Selected === true ) {
             var copy = answersArray 
             copy.push(answer)
-            setButtonValider(true)
-            const data = await fetch('/validerQuiz', {
+            setButtonValider(true)    // activation du bouton valider car réponse sélectionnée 
+            const data = await fetch('/validerQuiz', {      // envoi des réponses en BDD 
                 method: 'POST',
                 headers: {'Content-Type':'application/x-www-form-urlencoded'},
                 body: `rep1=${copy[0]}&rep2=${copy[1]}&rep3=${copy[2]}&rep4=${copy[3]}&rep5=${copy[4]}&rep6=${copy[5]}&rep7=${copy[6]}&token=${props.userToken}` 
             });
-            const body = await data.json()
-            
-           
-            props.addPalette(body.userPalette)
-    
-
-        } else  { setError('Merci de sélectionner une réponse') } 
-      
+            const body = await data.json()      // réponse reçue : palette 
+            props.addPalette(body.userPalette)  // ajout de l'objet dans le Store 
+        } else  { setError('Merci de sélectionner une réponse') }   // si pas de réponse selectionnée 
     }
 
-    if (buttonValider === true) {return <Redirect to='/mypalette' />}
+  if (buttonValider === true) {return <Redirect to='/mypalette' />}   // si le bouton valider est actif, redirection vers le résultat
 
+
+    /////////// GESTION DE LA SELECTION DES REPONSES  ///////////
     var clickPhoto1 = async () => {
-        if (isPhoto1Selected === false){
+        if (isPhoto1Selected === false){    // mécanique pour permettre uniquement la sélection d'une seule réponse
             set_isPhoto1Selected(true)
             set_isPhoto2Selected(false)
             set_isPhoto3Selected(false)
@@ -182,7 +184,7 @@ function Quiz(props) {
             set_isPhoto1Selected(false)
         }
     }
-    if (isPhoto1Selected === true) {
+    if (isPhoto1Selected === true) {    // ajout d'une bordure si réponse sélectionnée 
         var selectBorder1 = '4px solid #9AB6A4'
         var borderRadius1 = '7%'
     }
@@ -229,32 +231,33 @@ function Quiz(props) {
     }
     if (isPhoto4Selected === true) {
         var selectBorder4 = '4px solid #9AB6A4';
-        var borderRadius4 = '5%';
+        var borderRadius4 = '7%';
     }
     
 
-
-
-    var buttons = 
+    /////////// GESTION DE L'AFFICHAGE DES BOUTONS ///////////
+    var buttons =       // boutons de base : << et >> 
     <div className= 'quizzButton'> 
     <img   className='arrow-button' src='arrow-left.png' alt='arrow left' onClick={() => handleClickDecreaseWidth()}/>
     <img  className='arrow-button' src='arrow-right.png' alt='arrow right' onClick={() => handleClickIncreaseWidth()}/>
     </div>; 
 
-    if (clickCount === 6 ) {  
+    if (clickCount === 6 ) {        // si on est à la dernière question, << et "valider"
     buttons = 
     <div className= 'quizzButton'> 
     <img src='arrow-left.png' alt='arrow left'  className='arrow-button' onClick={() => handleClickDecreaseWidth()}/>
     <button type='button' className='ButtonQuestionnaire' onClick={() => {handleClickValider()}}> Valider</button>
     </div> } 
 
-    else if (clickCount === 0) {
+    else if (clickCount === 0) {    // si on est à la première question uniquement >>
     buttons = 
     <div className= 'quizzButton'> 
     <img className="arrow-button" src='arrow-right.png' alt='arrow left' 
     onClick={() => handleClickIncreaseWidth()}/>
     </div>; }
 
+
+/////////// GESTION DE L'AFFICHAGE DU MESSAGE D'ERREUR ///////////
   if (error !== null) {
     <p className="ErrorQuiz"> {error}</p> 
 } else {
@@ -263,34 +266,34 @@ function Quiz(props) {
 
     return (
         <div className='background'> 
-          <NavBar/>
+            <NavBar/>
             <div className='ScreenQuestion' > 
-            <p  className='questions'> {currentQuestion.question} </p>
 
-            <Row className= 'questionsPhoto' style={{width:'100%', marginLeft:'4px'}}  >  
-            <Col lg={3} md={6} xs={6} className='photoBox'>
-                <img className='photo'  src={currentQuestion.photo1.url} alt='ethnique'   style={{border:selectBorder1, borderRadius: borderRadius1}} onClick={()=> {setAnswer('ethnique'); clickPhoto1()}} />
-            </Col>
-            <Col lg={3} md={6} xs={6} className='photoBox'>
-                <img className='photo'  src={currentQuestion.photo2.url} alt='bohème'   style={{ border: selectBorder2,borderRadius: borderRadius2 }} onClick={()=> {setAnswer('bohème');clickPhoto2()}}/>
-            </Col>
-            <Col lg={3} md={6} xs={6} className='photoBox'>
-                <img className='photo'  src={currentQuestion.photo3.url} alt='artDeco' style={{border: selectBorder3,  borderRadius: borderRadius3}} onClick={()=> {setAnswer('artDeco');clickPhoto3()}}/>
-            </Col>
-            <Col lg={3} md={6} xs={6} className='photoBox'>
-                <img className='photo' src={currentQuestion.photo4.url} alt='modernMinimal' style={{border: selectBorder4, borderRadius: borderRadius4,}} onClick={()=> {setAnswer('modernMinimal');clickPhoto4()}}/>
-            </Col>
-
-            </Row>
+                <p  className='questions'> {currentQuestion.question} </p>
+                <Row className= 'questionsPhoto' style={{width:'100%', marginLeft:'4px'}}  >  
+                    <Col lg={3} md={6} xs={6} className='photoBox'>
+                        <img className='photo'  src={currentQuestion.photo1.url} alt='ethnique'   style={{border:selectBorder1, borderRadius: borderRadius1}} onClick={()=> {setAnswer('ethnique'); clickPhoto1()}} />
+                    </Col>
+                    <Col lg={3} md={6} xs={6} className='photoBox'>
+                        <img className='photo'  src={currentQuestion.photo2.url} alt='bohème'   style={{ border: selectBorder2,borderRadius: borderRadius2 }} onClick={()=> {setAnswer('bohème');clickPhoto2()}}/>
+                    </Col>
+                    <Col lg={3} md={6} xs={6} className='photoBox'>
+                        <img className='photo'  src={currentQuestion.photo3.url} alt='artDeco' style={{border: selectBorder3,  borderRadius: borderRadius3}} onClick={()=> {setAnswer('artDeco');clickPhoto3()}}/>
+                    </Col>
+                    <Col lg={3} md={6} xs={6} className='photoBox'>
+                        <img className='photo' src={currentQuestion.photo4.url} alt='modernMinimal' style={{border: selectBorder4, borderRadius: borderRadius4,}} onClick={()=> {setAnswer('modernMinimal');clickPhoto4()}}/>
+                    </Col>
+                </Row>
 
             <div className="ProgressBar" style={{ height:"3vh", display:'flex', justifyContent:'center'}} > 
-                <div style={{borderBottom:'3px solid #FCFBF6', width:`${progressBarWidth}%`}}> </div>
-               
+                <div style={{borderBottom:'3px solid #FCFBF6', width:`${progressBarWidth}%`}}> </div> 
             </div>
+
             <p style={{height:'2vh'}} className="ErrorQuiz"> {error}</p> 
+
             {buttons} 
+
             </div>
-       
      </div> 
 
     );
@@ -304,7 +307,6 @@ function Quiz(props) {
   
   function mapDispatchToProps(dispatch){
     return {
-       
       addPalette: function(palette){
         dispatch({type: 'addPalette', palette: palette})
       }
