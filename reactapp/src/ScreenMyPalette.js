@@ -40,7 +40,6 @@ function MyPalette(props) {
   };
 
  
-  
   if (palette) {   // si il y a une palette dans le store  
     var paletteName = palette.name;     // affichage du nom de la palette 
     if (paletteName === "artDeco") {
@@ -101,12 +100,6 @@ function MyPalette(props) {
 function mapStateToProps(state) {
   return { userPaletteFromStore: state.palette, token: state.token };
 }
-function mapDispatchToProps(dispatch) {
-  return {
-    addPalette: function (palette) {
-      dispatch({ type: "addPalette", palette: palette });
-    },
-  };
-}
 
-export default connect(mapStateToProps, mapDispatchToProps)(MyPalette);
+
+export default connect(mapStateToProps, null)(MyPalette);

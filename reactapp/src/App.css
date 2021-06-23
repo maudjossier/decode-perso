@@ -526,6 +526,7 @@ transform: scale(1.1)
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  height: 400px;
 }
 
 
@@ -827,7 +828,8 @@ transform: scale(1.1)
 .h4style {
 font-weight: bold;
 color:#203126;
-margin-bottom: 10px;
+margin-bottom: 0px; 
+
 }
 
 .ArticleShoppingList {  
@@ -845,6 +847,8 @@ border-bottom: 3px solid #203126;
 color:#203126;
 margin-bottom: 10px;
 }
+
+
 
 .FilterContainer {
   display: flex;
@@ -972,6 +976,13 @@ transition: transform .2s
   background-color: #fcfbf6;
 }
 
+.TitleInspoContainer{
+  font-weight: bold;
+  border-bottom: 3px solid #203126;
+  color:#203126;
+  margin-bottom: 10px;
+  }
+
 .Inpiration-Text {
 margin-left: 10%;
 margin-right: 10%;
@@ -1044,6 +1055,15 @@ margin-bottom: 30px;
     margin-top: 15px;
     font-size: 22px  !important;
     }
+  .scrollerShoppingList {
+  display:flex;
+  justify-content: center;
+  width: 75%;
+  height: 53vh;
+  overflow-y: scroll;
+  scrollbar-color: rebeccapurple green;
+  scrollbar-width: thin;
+}  
 
 
 .h4style {

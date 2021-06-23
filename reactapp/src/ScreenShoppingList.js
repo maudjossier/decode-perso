@@ -9,8 +9,6 @@ import { faHeart, faSearch } from '@fortawesome/free-solid-svg-icons'
 import { Popover, Button, Checkbox } from 'antd';
 
 
-
-
 function ShoppingList(props) {
 const [articleList, setArticleList] = useState([])
 const [articleListFromBDD, setArticleListFromBDD] = useState([])
@@ -20,9 +18,7 @@ const [FilterMobilier, setFilterMobilier] = useState(false)
 const [stateDeco, setStateDeco] = useState(false)
 const [stateMob, setStateMob] = useState(false)
 
-
 var userPalette = props.userPaletteFromStore
-
 var likeColor = ''      // gestion de la couleur des picto coeur si dans wishlist 
 
 ////////// CHERCHER LES ARTICLES EN BDD  //////////
@@ -171,19 +167,6 @@ function onChangeMobilier(e) {
   setFilterMobilier(e.target.checked)  
 }
 
-/* function onChangeSetColor(color) {
-  setisCheckAllColors(false)
-  var whichFilter ; 
-  var resultFilterColor; 
-if ( stateDeco === true || stateMob === true ) {
-  if (stateDeco === true) { whichFilter = "décoration" } 
-  else { whichFilter = 'mobilier'} 
- resultFilterColor = articleListFromBDD.filter(article => article.category === whichFilter && article.color === color)
-} else 
-  resultFilterColor = articleListFromBDD.filter(article =>  article.color === color)
-setArticleList(resultFilterColor)
-} */
-
 if (FilterDeco === true) {
   setStateMob(false)       // gestion du check  
   setStateDeco(true)       // gestion du check 
@@ -208,46 +191,12 @@ var handleClickReset = () => {    // réinitialisation du filtre, tout passe à 
   setFilterDeco(false)
 }
 
-///////////// COULEURS //////////////// 
-
-/* var onChangeResetColor = () => {
-  setisCheckAllColors(true)
-  var whichFilter ; 
-  if ( stateDeco === true || stateMob === true ) {
-    if (stateDeco === true) { whichFilter = "décoration" } 
-    else { whichFilter = 'mobilier'} 
-   var resultFilter = articleListFromBDD.filter(article => article.category === whichFilter)
-   setArticleList(resultFilter)
-} else  {
-  setArticleList(articleListFromBDD)
-}
-} 
-
-function isUnique(item, position, array) {
-  return array.indexOf(item) === position;
-}
-
- const colorList = []
-for (var i=0; i<articleListFromBDD.length; i++ ) {
-  colorList.push(articleListFromBDD[i].color)
-}
-var uniqueColorList = colorList.filter(isUnique); 
-
-var displayColors = uniqueColorList.map(function(color, i) {
-  return <Radio key={i} value={color} onChange={() =>{onChangeSetColor(color)}}> {color} </Radio>
-}) 
- */
 var content = (
   <div style={{backgroundColor:'#fcfbf6'}}> 
     <h6 className="h6filter"> CATÉGORIES </h6>
       <Checkbox  checked={stateMob} onChange={onChangeMobilier}>Mobilier</Checkbox>
       <Checkbox  checked={stateDeco} onChange={onChangeDécoration}>Décoration</Checkbox>
-   {/*  <h6 className="h6filter"> COULEURS </h6>
-      <Radio.Group > 
-        {displayColors}
-        <Radio defaultChecked={true} checked={isCheckAllColors} onChange={onChangeResetColor}> Toutes les couleurs </Radio>
-      </Radio.Group> */}
-  <p style={{color: 'grey', textDecoration: 'underline grey', marginBottom:'0px', textAlign:'center', cursor:'pointer'}} onClick={()=> handleClickReset()}> Réinitialiser le filtre </p>
+    <p style={{color: 'grey', textDecoration: 'underline grey', marginBottom:'0px', textAlign:'center', cursor:'pointer'}} onClick={()=> handleClickReset()}> Réinitialiser le filtre </p>
   </div>
 )
 
@@ -310,7 +259,7 @@ var content = (
 {/* PARTIE INSPIRATION */}
     <div id='sect2' className="ContainerInspi" >
       <div className="Inpiration-Text" > 
-      <h4 className="TitleShoppingListContainer" style={{paddingTop:"18vh"}}> INSPIRATIONS </h4>
+      <h4 className="TitleInspoContainer" style={{paddingTop:"18vh"}}> INSPIRATIONS </h4>
       </div>
 
       <div className="Inspirations-DisplayPhoto"> 

@@ -20,12 +20,14 @@ function Login(props) {
 
   //////// INSCRIPTION  ////////
   var handleSubmitSignup = async () => {  
+    console.log('bouton clické')
     const data = await fetch("/signUp", {
       method: "POST",
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
       body: `usernameFromFront=${signUpUsername}&emailFromFront=${signUpEmail}&passwordFromFront=${signUpPassword}&paletteFromStore=${props.userPaletteFromStore._id}`,
     });
     const body = await data.json();
+    console.log('body', body)
 
     if (body.result === true) {
       setUserExists(true);
