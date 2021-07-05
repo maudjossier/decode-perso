@@ -17,7 +17,6 @@ router.post('/signUp', async (req, res, next) => {
   var saveUser = null
   var result = false
   var token = null
-  console.log('body', req.body)
 
   // vérification de la présence ou non de l'email dans la BDD
   const data = await userModel.findOne({
@@ -50,7 +49,6 @@ router.post('/signUp', async (req, res, next) => {
       error.push('Répondez au questionnaire avant de vous inscrire')
     }
   
-    console.log('error', error)
   // si aucune erreur, l'utilisateur est inscrit dans la base de données
   if(error.length == 0){
       var hash = bcrypt.hashSync(req.body.passwordFromFront, 10); 
@@ -75,6 +73,8 @@ router.post('/signUp', async (req, res, next) => {
 
   
 });
+
+
 
 router.post("/signIn", async (req, res) => {
   var result = false;
@@ -117,6 +117,8 @@ router.post("/signIn", async (req, res) => {
 
   ;
 });
+
+
 
 router.post("/validerQuiz", async (req, res, next) => {
   var result = false;
@@ -218,6 +220,8 @@ router.post("/validerQuiz", async (req, res, next) => {
     }
 }); */
 
+
+
 router.post("/myShoppingList", async (req, res) => {
   var result = false;
   var paletteFromFront = req.body.paletteName;
@@ -235,6 +239,8 @@ router.post("/myShoppingList", async (req, res) => {
     res.json({ result });
   }
 });
+
+
 
 router.post("/addToWishlist", async (req, res) => {
   var result = false;

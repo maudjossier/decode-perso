@@ -44,10 +44,6 @@ function MyPalette(props) {
     var paletteName = palette.name;     // affichage du nom de la palette 
     if (paletteName === "artDeco") {
       paletteName = "Art Déco"
-    } else if (paletteName === "ethnique") {
-      paletteName = "Ethnique"
-    } else if (paletteName === "bohème") {
-      paletteName = "Bohème"
     } else if (paletteName === "modernMinimal") {
       paletteName = "Modern Minimal"
     }

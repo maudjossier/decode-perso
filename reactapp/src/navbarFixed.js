@@ -17,6 +17,9 @@ function NavbarFixed(props) {
       <Link className="navLink" to="/shoppinglist">
         <p>Ma shopping list</p>
       </Link>
+      <Link className="navLink" to="/moodboard">
+        <p>Mon moodboard</p>
+      </Link>
       <Link className="navLink" to="/">
         <p
           onClick={() => {
@@ -59,7 +62,7 @@ function NavbarFixed(props) {
           <h2 className="h2Navbar">DÉCODE.</h2>
         </Link>
       </div>
-      <div>
+      
         <div className="icon">
           <Link to="/allpalettes">
             <img src="palette.svg" alt="palette icon" className="NavBarIcon" />
@@ -72,7 +75,7 @@ function NavbarFixed(props) {
             </Badge>
           </div>
           {userNav}
-        </div>
+        
       </div>
     </div>
   );

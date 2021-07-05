@@ -17,6 +17,9 @@ function NavBar(props) {
       <Link className="navLink" to="/shoppinglist">
         <p>Ma shopping list</p>
       </Link>
+      <Link className="navLink" to="/moodboard">
+        <p>Mon moodboard</p>
+      </Link>
       <Link className="navLink" to="/">
         <p
           onClick={() => {

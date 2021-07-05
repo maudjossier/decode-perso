@@ -18,6 +18,7 @@ import ShoppingList from './ScreenShoppingList';
 import Login from './ScreenLogin';
 import Wishlist from './ScreenWishlist'
 import AllPalettes from './ScreenAllPalettes'
+import Moodboard from './ScreenMoodboard'
 import NavBar from './navbar'
 import NavbarFixed from './navbarFixed'
 
@@ -40,6 +41,7 @@ function App() {
       <Route path="/login" component={Login}  />
       <Route path="/wishlist" component={Wishlist}  />
       <Route path="/allpalettes" component={AllPalettes}  />
+      <Route path="/moodboard" component={Moodboard}  />
       <Route path="/navbar" component={NavBar}  />
       <Route path="/navbarFixed" component={NavbarFixed}  />
 

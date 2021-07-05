@@ -22,22 +22,22 @@ var userPalette = props.userPaletteFromStore
 var likeColor = ''      // gestion de la couleur des picto coeur si dans wishlist 
 
 ////////// CHERCHER LES ARTICLES EN BDD  //////////
+async function loadData() { 
+  const rawResponse = await fetch('/myShoppingList', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+    body: `paletteName=${userPalette.name}`
+  })
+  const body = await rawResponse.json()     
+  setArticleList(body.shoppingList)   // Mettre les articles dans un état dynamique qui va être utilisé pour filtrer 
+  setArticleListFromBDD(body.shoppingList)  // Mettre les articles dans un état ArticleListFromBDD qui ne changera pas 
+}
+
 useEffect( () => {
-  async function loadData() { 
-    const rawResponse = await fetch('/myShoppingList', {
-      method: 'POST',
-      headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-      body: `paletteName=${userPalette.name}`
-    })
-    const body = await rawResponse.json()     
-    setArticleList(body.shoppingList)   // Mettre les articles dans un état dynamique qui va être utilisé pour filtrer 
-    setArticleListFromBDD(body.shoppingList)  // Mettre les articles dans un état ArticleListFromBDD qui ne changera pas 
-  }
   loadData()
-  
  }, []);
 
-
+////////// WISHLIST //////////
  useEffect( () => {
   setWishlist(props.wishlist)
   console.log('wishlist from store', props.wishlist)
@@ -149,10 +149,6 @@ useEffect( () => {
   var paletteName = props.userPaletteFromStore.name;
     if (paletteName === "artDeco") {
         paletteName = "Art Déco"
-    } else if (paletteName === "ethnique") {
-          paletteName = "Ethnique"
-    } else if (paletteName === "bohème") {
-          paletteName = "Bohème"
     } else if (paletteName === "modernMinimal") {
           paletteName = "Modern Minimal"
     } 
@@ -276,7 +272,10 @@ var content = (
 }}
 
 function mapStateToProps(state) {
-  return { userPaletteFromStore: state.palette, token: state.token, wishlist: state.wishlist };
+  return { 
+     userPaletteFromStore: state.palette,
+     token: state.token, 
+     wishlist: state.wishlist };
 }
 
 function mapDispatchToProps(dispatch){

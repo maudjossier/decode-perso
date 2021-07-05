@@ -179,7 +179,6 @@ function Quiz(props) {
             set_isPhoto2Selected(false)
             set_isPhoto3Selected(false)
             set_isPhoto4Selected(false)
-
         } else {
             set_isPhoto1Selected(false)
         }

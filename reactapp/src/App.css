@@ -1006,7 +1006,7 @@ margin-bottom: 30px;
   justify-content: center;
 }
 
-.color1{
+.dis{
   height: 50px;
   width:50px;
 }
@@ -1041,7 +1041,7 @@ margin-bottom: 30px;
     cursor: pointer;
     transition: transform .2s
   }
-  .color1{
+  .dis{
     height: 35px;
     width:35px;
   }
@@ -1218,8 +1218,6 @@ margin-bottom: 30px;
 }
 
 /* PAGE WISHLIST */
-
-
 .backgroundWishlist {
   background-color: #fcfbf6;
   width: 100%;
@@ -1437,7 +1435,6 @@ height: fit-content;
 }
 
 .PhotoInspoAllPalette {
-  /* marginRight: '20px', height:'100%', maxWidth: '500px',maxHeight:'4000',borderRadius:"10px" */
 margin:10px;
 height: 100%;
 max-width: 500px;
@@ -1493,4 +1490,98 @@ border-radius: 10px;
     justify-content: center;
     align-items: center;
    }
+}
+
+/* MOODBOARD */
+
+.containerMoodboard{
+  display: flex;
+  justify-content: flex-end;
+  
+}
+.containerMoodboardArticles{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 1%;
+  width: 35vh;
+  
+}
+
+.cardMoodboard {
+  background-color:white;
+  margin: 10px;
+  min-width: 120px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+ }
+ 
+ .productMoodboard {
+ display:flex;
+ justify-content: center;
+ align-items: center;
+ width: 100%;
+ height: 120px
+ }
+
+ .MoodboardSpace {
+   background-color: white;
+   width: 90%;
+   height: 90%;
+   display:flex;
+   border: 1px solid black;
+   flex-direction: row;
+  justify-content: flex-end;
+  
+ }
+
+ .MoodboardBox {
+   height: 100%;
+   
+   margin: 10px 
+ }
+
+ .MoodboardRow {
+   display:flex;
+   justify-content:center
+ }
+ .MoodboardTitle {
+  font-family: "Abril Fatface", cursive;
+  font-weight: normal;
+  text-align: center;
+  margin:20px
+ }
+
+ .LeftMoodboard {
+   display: flex;
+   flex-direction: column;
+   justify-content: flex-start;
+   width:100%
+ }
+
+ .imageMoodboard {
+   max-height: 200px;
+ }
+
+
+ .MoodboardPalette {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+ }
+
+ .colorMoodboard{
+  height: 100px;
+  width:80px;
+  border-radius: 10%;
+  margin: 10px 10px 10px 0px
+}
+
+.InspoBox {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
 }
