@@ -76,12 +76,12 @@ window.dragMoveListener = dragMoveListener
 //////// MAP DES ARTICLES EN WISHLIST ////////
 var displayWishlist = wishlist.map((article,i) => {
   return (
-    <Col  md={2}lg={2} className="cardMoodboard" > 
+    <div   className="cardMoodboard draggable" > 
        <div  className='productMoodboard' >
-         <img  style={{maxWidth:'100%', maxHeight: '100%'}} src={article.imageUrl}  alt='product' /> 
+         <img   style={{maxWidth:'100%', maxHeight: '100%'}} src={article.imageUrl}  alt='product' /> 
         </div>
         <img  style={{height:'15px', width:'15px', marginBottom:'3px', cursor:'pointer'}} src='./plus.svg' onClick={() => {handleClickAddArticle(article.imageUrl)}}/>
-  </Col>
+  </div>
   )
 })
 
@@ -93,8 +93,8 @@ var displayPalette = props.userPaletteFromStore.colors.map((color, i) => {
   
 var displayArticles = moodboardPictures.map((url, i) => {
     return (
-    <Col className='draggable' style={{display:'flex', justifyContent:'center', marginBottom:'10px'}} md={4}lg={4}> 
-        <img src={url} className='imageMoodboard' alt='product' /> 
+    <Col style={{display:'flex', justifyContent:'center', marginBottom:'10px'}} md={4}lg={4}> 
+        <img src={url} className='imageMoodboard' alt='product' crossorigin="use-credentials" /> 
     </Col>
      ) }
 )    
@@ -104,16 +104,16 @@ var listInspo = [];
 for (var i=0; i<3; i++) {
  listInspo.push(props.userPaletteFromStore.inspirations[i])
 }
-console.log('palete',listInspo)
+
     var displayInspo = listInspo.map((photo, i) => {
     return (
-          <img style={{maxWidth:'20vh'}} src={photo} alt='inspo'/>
+          <img style={{maxWidth:'20vh'}} src={photo} alt='inspo' /* crossorigin="use-credentials" *//>
       )
     })  
 
 var handleClickScreen = () => {
      
-    html2canvas(document.querySelector('#MoodBoard',), {useCORS: true, proxy:'html2canvasproxy'}).then(function(canvas) {
+    html2canvas(document.querySelector('#MoodBoard')).then(function(canvas) {
         
         saveAs(canvas.toDataURL(), 'file-name.png');
     });
@@ -125,7 +125,7 @@ function saveAs(uri, filename) {
       link.href = uri;
       link.download = filename;
 
-      //Firefox requires the link to be in the body
+      //Firefox requires the link to be in the body”
       document.body.appendChild(link);
 
       //simulate click
@@ -138,7 +138,9 @@ function saveAs(uri, filename) {
     }
   }
 
-if (wishlist.length !== 0){     // SI LA WISHLIST EST N'EST PAS VIDE 
+  
+
+if (wishlist.length !== 0){  // SI LA WISHLIST EST N'EST PAS VIDE 
     return (
       <div className='backgroundWishlist'>
       <NavBar/>
@@ -156,29 +158,29 @@ if (wishlist.length !== 0){     // SI LA WISHLIST EST N'EST PAS VIDE
        
      <Container fluid={true}  className='containerMoodboard'> 
 
-        <div   id='MoodBoard' className='MoodboardSpace'> 
+        <div  id='Moodboard' className='MoodboardSpace'> 
         <div className='InspoBox'> {displayInspo} </div> 
-            <div className='LeftMoodboard'> 
+             <div className='LeftMoodboard'>   
                 
                     <h4 className='MoodboardTitle'> MON SALON {props.userPaletteFromStore.name.toUpperCase()}</h4>
                     
-                    
+                  
                      
                 
                 <div className='MoodboardBox' > 
                 
-                    <Row className='MoodboardRow'> {displayArticles}</Row>
+                    <Row className='MoodboardRow'> {displayArticles} </Row>
                         
                     
-                </div>
+                </div> 
                 
-            </div>
+             </div>
             
                 
                 <div className='MoodboardPalette'>
                     {displayPalette} 
                 </div>
-            
+           
         </div>
 
 
