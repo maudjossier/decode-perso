@@ -18,9 +18,9 @@ function Home(props) {
       <Link className="navLink" to="/shoppinglist">
         <p>Ma shopping list</p>
       </Link>
-      <Link className="navLink" to="/moodboard">
+     {/*  <Link className="navLink" to="/moodboard">
         <p>Mon moodboard</p>
-      </Link>
+      </Link> */}
       <Link className="navLink" to="/">        {/* déconnexion : suppression token, wishlist et palette du store */}
         <p onClick={() => {props.suppressionToken();props.deleteWishlist();props.deletePalette();}} >
           Déconnexion
