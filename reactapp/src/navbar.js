@@ -18,7 +18,7 @@ function NavBar(props) {
         <p>Ma shopping list</p>
       </Link>
      {/*  <Link className="navLink" to="/moodboard">
-        <p>Mon moodboard</p>
+        <p>Mon moodboard</p>  
       </Link> */}
       <Link className="navLink" to="/">
         <p
