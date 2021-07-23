@@ -94,7 +94,7 @@ var displayPalette = props.userPaletteFromStore.colors.map((color, i) => {
 var displayArticles = moodboardPictures.map((url, i) => {
     return (
     <Col style={{display:'flex', justifyContent:'center', marginBottom:'10px'}} md={4}lg={4}> 
-        <img src={url} className='imageMoodboard' alt='product' crossorigin="use-credentials" /> 
+        <img src={url} className='imageMoodboard' alt='product' /> 
     </Col>
      ) }
 )    

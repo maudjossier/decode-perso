@@ -277,10 +277,10 @@ function Quiz(props) {
                         <img className='photo'  src={currentQuestion.photo2.url} alt='bohème'   style={{ border: selectBorder2,borderRadius: borderRadius2 }} onClick={()=> {setAnswer('bohème');clickPhoto2()}}/>
                     </Col>
                     <Col lg={3} md={6} xs={6} className='photoBox'>
-                        <img className='photo'  src={currentQuestion.photo3.url} alt='artDeco' style={{border: selectBorder3,  borderRadius: borderRadius3}} onClick={()=> {setAnswer('artDeco');clickPhoto3()}}/>
+                        <img rel="preload" className='photo'  src={currentQuestion.photo3.url} alt='artDeco' style={{border: selectBorder3,  borderRadius: borderRadius3}} onClick={()=> {setAnswer('artDeco');clickPhoto3()}}/>
                     </Col>
                     <Col lg={3} md={6} xs={6} className='photoBox'>
-                        <img className='photo' src={currentQuestion.photo4.url} alt='modernMinimal' style={{border: selectBorder4, borderRadius: borderRadius4,}} onClick={()=> {setAnswer('modernMinimal');clickPhoto4()}}/>
+                        <img rel="preload" className='photo' src={currentQuestion.photo4.url} alt='modernMinimal' style={{border: selectBorder4, borderRadius: borderRadius4,}} onClick={()=> {setAnswer('modernMinimal');clickPhoto4()}}/>
                     </Col>
                 </Row>
 
