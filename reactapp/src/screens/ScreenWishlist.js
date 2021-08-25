@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import 'bootstrap/dist/css/bootstrap.min.css'
 import {Container, Row, Col } from 'react-bootstrap';
-import NavbarFixed from './navbarFixed';
+import NavbarFixed from '../components/navbarFixed';
 
 
 

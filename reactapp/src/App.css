@@ -199,7 +199,7 @@ p {
 }
 
 .imageBackground {
-  background-image: url(background.png);
+  background-image: url(./background-image/background.png);
   height: 100vh;
   width: 100vw;
   background-size: 100%;
@@ -383,7 +383,7 @@ transform: scale(1.1)
 
 @media screen and (max-width: 500px) {
   .imageBackground {
-    background-image: url(background-mobile.jpeg);
+    background-image: url(./background-image/background-mobile.jpeg);
     padding-top: 100px;
     display:flex; 
     align-items: center;

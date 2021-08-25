@@ -3,7 +3,7 @@ import { Link, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import 'bootstrap/dist/css/bootstrap.min.css'
 import {Container, Row, Col } from 'react-bootstrap';
-import NavBar from "./navbar";
+import NavBar from "../components/navbar";
 import interact from 'interactjs'
 import html2canvas from 'html2canvas';
 

@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Redirect } from "react-router-dom";
-import "./App.css";
-import NavBar from "./navbar";
+import NavBar from "../components/navbar";
 import { connect } from "react-redux";
 import "antd/dist/antd.css";
 import { Input } from "antd";

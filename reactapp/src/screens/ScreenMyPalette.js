@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import NavBar from "./navbar";
+import NavBar from "../components/navbar";
 import { connect } from "react-redux";
 import copy from "copy-to-clipboard";
 import { Popover, notification } from "antd";

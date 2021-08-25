@@ -3,7 +3,7 @@ import { Link, Redirect} from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css'
 import {Container, Row, Col } from 'react-bootstrap';
 import { connect } from "react-redux";
-import NavbarFixed from './navbarFixed';
+import NavbarFixed from '../components/navbarFixed';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHeart, faSearch } from '@fortawesome/free-solid-svg-icons'
 import { Popover, Button, Checkbox } from 'antd';
@@ -101,7 +101,7 @@ useEffect( () => {
    <Col key={i}  xs={10} md={4} lg={3} className="articleCard" > 
     <a href={article.merchantUrl} target="_blank" rel="noreferrer">
       <div  className='productImage' >
-        <img style={{maxWidth:'100%', maxHeight: '100%'}} src={article.imageUrl}  alt='product' /> 
+        <img  style={{maxWidth:'100%', maxHeight: '100%'}} src={article.imageUrl}  alt='product' /> 
         {/* image + picto coeur  */}
       </div>
     </a>

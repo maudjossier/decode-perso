@@ -4,23 +4,23 @@ import {Provider} from 'react-redux';
 import {createStore, combineReducers} from 'redux';
 
 
-import token from './reducers/token'
-import palette from './reducers/palette'
-import wishlist from './reducers/wishlist'
-import userName from './reducers/user'
+import token from './reducers/token';
+import palette from './reducers/palette';
+import wishlist from './reducers/wishlist';
+import userName from './reducers/user';
 
 
-import Home from './ScreenHome';
-import Quiz from './ScreenQuizz';
-import MyPalette from './ScreenMyPalette';
+import Home from './screens/ScreenHome';
+import Quiz from './screens/ScreenQuizz';
+import MyPalette from './screens/ScreenMyPalette';
 
-import ShoppingList from './ScreenShoppingList';
-import Login from './ScreenLogin';
-import Wishlist from './ScreenWishlist'
-import AllPalettes from './ScreenAllPalettes'
-import Moodboard from './ScreenMoodboard'
-import NavBar from './navbar'
-import NavbarFixed from './navbarFixed'
+import ShoppingList from './screens/ScreenShoppingList';
+import Login from './screens/ScreenLogin';
+import Wishlist from './screens/ScreenWishlist';
+import Moodboard from './screens/ScreenMoodboard';
+import AllPalettes from './screens/ScreenAllPalettes';
+import NavBar from './components/navbar';
+import NavbarFixed from './components/navbarFixed';
 
 
 

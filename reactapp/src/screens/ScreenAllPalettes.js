@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import NavBar from "./navbar";
-import AllPaletteModel from "./AllPaletteModel";
+import NavBar from "../components/navbar";
+import AllPaletteModel from "../components/AllPaletteModel";
 
 
 function AllPalettes() {

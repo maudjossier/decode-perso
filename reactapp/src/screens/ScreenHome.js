@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "./App.css";
+import '../App.css'
 import { connect } from "react-redux";
 import { Popover } from "antd";
 import { Badge } from "antd";
